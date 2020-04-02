@@ -163,7 +163,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             //return
             //    dataSet.Tables["Authors"]
             //        .AsEnumerable()
-            //        .Select(row => new Author()
+            //        .Select(row => new Author
             //        {
             //            Id = Convert.ToInt64(row["Id"]),
             //            Name = row.Field<string>("Name")
@@ -173,7 +173,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             // Синтаксис запросов
             var authors =
                 from row in dataSet.Tables["Authors"].AsEnumerable()
-                select new Author()
+                select new Author
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     Name = row.Field<string>("Name")
@@ -200,7 +200,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             return
                 dataRow == null ?
                 null :              // Если не нашли
-                new Author()        // Если нашли
+                new Author          // Если нашли
                 {
                     Id = Convert.ToInt64(dataRow["Id"]),
                     Name = dataRow.Field<string>("Name")
@@ -220,7 +220,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             long id;
             // Получаем последнее выданное БД значение автоинкремента
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);
@@ -286,7 +286,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             //return
             //    dataSet.Tables["Presses"]
             //        .AsEnumerable()
-            //        .Select(row => new Press()
+            //        .Select(row => new Press
             //        {
             //            Id = Convert.ToInt64(row["Id"]),
             //            Name = row.Field<string>("Name")
@@ -296,7 +296,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             // Синтаксис запросов
             var presses =
                 from row in dataSet.Tables["Presses"].AsEnumerable()
-                select new Press()
+                select new Press
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     Name = row.Field<string>("Name")
@@ -322,7 +322,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
 
             return dataRow == null ?
                 null :              // Если не нашли
-                new Press()         // Если нашли
+                new Press           // Если нашли
                 {
                     Id = Convert.ToInt64(dataRow["Id"]),
                     Name = dataRow.Field<string>("Name")
@@ -342,7 +342,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             long id;
             // Получаем последнее выданное БД значение автоинкремента
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);
@@ -408,7 +408,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             //return
             //    dataSet.Tables["Books"]
             //        .AsEnumerable()
-            //        .Select(row => new Book()
+            //        .Select(row => new Book
             //        {
             //            Id = Convert.ToInt64(row["Id"]),
             //            AuthorFk = Convert.ToInt64(row["AuthorFk"]),
@@ -422,7 +422,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             // Синтаксис запросов
             var books =
                 from row in dataSet.Tables["Books"].AsEnumerable()
-                select new Book()
+                select new Book
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     AuthorFk = Convert.ToInt64(row["AuthorFk"]),
@@ -452,7 +452,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
 
             return dataRow == null ?
                 null :              // Если не нашли
-                new Book()          // Если нашли
+                new Book            // Если нашли
                 {
                     Id = Convert.ToInt64(dataRow["Id"]),
                     AuthorFk = Convert.ToInt64(dataRow["AuthorFk"]),
@@ -481,7 +481,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
             long id;
             // Получаем последнее выданное БД значение автоинкремента
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);

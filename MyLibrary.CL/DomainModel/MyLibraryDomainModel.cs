@@ -19,9 +19,9 @@ namespace MyLibrary.CL.DomainModel
 
         #region IMyLibraryDomainModel implementation
 
-        public IRepository<Author> AuthorRepository { get { return authorRepository; } }
-        public IRepository<Press> PressRepository { get { return pressRepository; } }
-        public IRepository<Book> BookRepository { get { return bookRepository; } }
+        public IRepository<Author> AuthorRepository { get => authorRepository; }
+        public IRepository<Press> PressRepository { get => pressRepository; }
+        public IRepository<Book> BookRepository { get => bookRepository; }
 
         public void Dispose()
         {

@@ -43,7 +43,7 @@
             // buttonOk
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(204, 234);
+            this.buttonOk.Location = new System.Drawing.Point(220, 234);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(112, 36);
             this.buttonOk.TabIndex = 0;
@@ -59,7 +59,7 @@
             this.groupBox1.Controls.Add(this.labelProductName);
             this.groupBox1.Location = new System.Drawing.Point(24, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(470, 196);
+            this.groupBox1.Size = new System.Drawing.Size(505, 196);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -68,10 +68,10 @@
             this.linkLabelWebsite.AutoSize = true;
             this.linkLabelWebsite.Location = new System.Drawing.Point(189, 118);
             this.linkLabelWebsite.Name = "linkLabelWebsite";
-            this.linkLabelWebsite.Size = new System.Drawing.Size(173, 17);
+            this.linkLabelWebsite.Size = new System.Drawing.Size(179, 17);
             this.linkLabelWebsite.TabIndex = 3;
             this.linkLabelWebsite.TabStop = true;
-            this.linkLabelWebsite.Text = "http://itstep.barabash.com";
+            this.linkLabelWebsite.Text = "https://itstep.barabash.com";
             this.linkLabelWebsite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelWebsite_LinkClicked);
             // 
             // linkLabelEmail
@@ -100,9 +100,9 @@
             this.labelCopyright.AutoSize = true;
             this.labelCopyright.Location = new System.Drawing.Point(188, 82);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(252, 17);
+            this.labelCopyright.Size = new System.Drawing.Size(289, 17);
             this.labelCopyright.TabIndex = 1;
-            this.labelCopyright.Text = "Copyright (c) 2015, Дмитрий Барабаш";
+            this.labelCopyright.Text = "Copyright (c) 2015-2020, Дмитрий Барабаш";
             // 
             // labelProductName
             // 
@@ -120,7 +120,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOk;
-            this.ClientSize = new System.Drawing.Size(521, 286);
+            this.ClientSize = new System.Drawing.Size(552, 286);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonOk);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

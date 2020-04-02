@@ -1,7 +1,11 @@
 -- Создаем базу данных
 
 IF DB_ID('MyLibrary') IS NOT NULL
+BEGIN
+	USE master
+    ALTER DATABASE MyLibrary SET single_user with rollback immediate;
     DROP DATABASE MyLibrary;
+END
 GO
 
 CREATE DATABASE MyLibrary;

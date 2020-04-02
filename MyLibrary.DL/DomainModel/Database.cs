@@ -158,11 +158,11 @@ namespace MyLibrary.DL.DomainModel
 
         public IEnumerable<Author> GetAllAuthors()
         {
-            List<Author> authors = new List<Author>();
+            var authors = new List<Author>();
 
             foreach (DataRow row in dataSet.Tables["Authors"].Rows)
             {
-                authors.Add(new Author()
+                authors.Add(new Author
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     Name = row.Field<string>("Name")
@@ -178,7 +178,7 @@ namespace MyLibrary.DL.DomainModel
             {
                 // Если нашли
                 if (Convert.ToInt64(row["Id"]) == id)
-                    return new Author()
+                    return new Author
                     {
                         Id = Convert.ToInt64(row["Id"]),
                         Name = row.Field<string>("Name")
@@ -264,11 +264,11 @@ namespace MyLibrary.DL.DomainModel
 
         public IEnumerable<Press> GetAllPresses()
         {
-            List<Press> presses = new List<Press>();
+            var presses = new List<Press>();
 
             foreach (DataRow row in dataSet.Tables["Presses"].Rows)
             {
-                presses.Add(new Press()
+                presses.Add(new Press
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     Name = row.Field<string>("Name")
@@ -284,7 +284,7 @@ namespace MyLibrary.DL.DomainModel
             {
                 // Если нашли
                 if (Convert.ToInt64(row["Id"]) == id)
-                    return new Press()
+                    return new Press
                     {
                         Id = Convert.ToInt64(row["Id"]),
                         Name = row.Field<string>("Name")
@@ -370,11 +370,11 @@ namespace MyLibrary.DL.DomainModel
 
         public IEnumerable<Book> GetAllBooks()
         {
-            List<Book> books = new List<Book>();
+            var books = new List<Book>();
 
             foreach (DataRow row in dataSet.Tables["Books"].Rows)
             {
-                books.Add(new Book()
+                books.Add(new Book
                 {
                     Id = Convert.ToInt64(row["Id"]),
                     AuthorFk = Convert.ToInt64(row["AuthorFk"]),
@@ -394,7 +394,7 @@ namespace MyLibrary.DL.DomainModel
             {
                 // Если нашли
                 if (Convert.ToInt64(row["Id"]) == id)
-                    return new Book()
+                    return new Book
                     {
                         Id = Convert.ToInt64(row["Id"]),
                         AuthorFk = Convert.ToInt64(row["AuthorFk"]),
@@ -427,7 +427,7 @@ namespace MyLibrary.DL.DomainModel
             long id;
             // Получаем последнее выданное БД значение автоинкремента
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);

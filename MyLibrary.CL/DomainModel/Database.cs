@@ -35,16 +35,16 @@ namespace MyLibrary.CL.DomainModel
 
         public IEnumerable<Author> GetAllAuthors()
         {
-            List<Author> authors = new List<Author>();
+            var authors = new List<Author>();
 
             string sqlString = "SELECT Id, Name FROM Authors";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    authors.Add(new Author()
+                    authors.Add(new Author
                     {
                         Id = Convert.ToInt64(reader["Id"]),
                         Name = (string)reader["Name"]
@@ -59,7 +59,7 @@ namespace MyLibrary.CL.DomainModel
         {
             string sqlString = "SELECT Id, Name FROM Authors WHERE Id = @Id";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -67,7 +67,7 @@ namespace MyLibrary.CL.DomainModel
                 {
                     // Если нашли
                     if (reader.Read())
-                        return new Author()
+                        return new Author
                         {
                             Id = Convert.ToInt64(reader["Id"]),
                             Name = (string)reader["Name"]
@@ -82,7 +82,7 @@ namespace MyLibrary.CL.DomainModel
         public long InsertAuthor(Author author)
         {
             string sqlString = "INSERT INTO Authors (Name) VALUES (@Name)";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Name", author.Name));
                 command.ExecuteNonQuery();
@@ -91,7 +91,7 @@ namespace MyLibrary.CL.DomainModel
             long id;
 
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);
@@ -103,7 +103,7 @@ namespace MyLibrary.CL.DomainModel
         public void UpdateAuthor(Author author)
         {
             string sqlString = "UPDATE Authors SET Name = @Name WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", author.Id));
                 command.Parameters.Add(new SqlParameter("@Name", author.Name));
@@ -114,7 +114,7 @@ namespace MyLibrary.CL.DomainModel
         public void DeleteAuthor(long id)
         {
             string sqlString = "DELETE FROM Authors WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
                 command.ExecuteNonQuery();
@@ -128,16 +128,16 @@ namespace MyLibrary.CL.DomainModel
 
         public IEnumerable<Press> GetAllPresses()
         {
-            List<Press> presses = new List<Press>();
+            var presses = new List<Press>();
 
             string sqlString = "SELECT Id, Name FROM Presses";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    presses.Add(new Press()
+                    presses.Add(new Press
                     {
                         Id = Convert.ToInt64(reader["Id"]),
                         Name = (string)reader["Name"]
@@ -152,7 +152,7 @@ namespace MyLibrary.CL.DomainModel
         {
             string sqlString = "SELECT Id, Name FROM Presses WHERE Id = @Id";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -160,7 +160,7 @@ namespace MyLibrary.CL.DomainModel
                 {
                     // Если нашли
                     if (reader.Read())
-                        return new Press()
+                        return new Press
                         {
                             Id = Convert.ToInt64(reader["Id"]),
                             Name = (string)reader["Name"]
@@ -175,7 +175,7 @@ namespace MyLibrary.CL.DomainModel
         public long InsertPress(Press press)
         {
             string sqlString = "INSERT INTO Presses (Name) VALUES (@Name)";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Name", press.Name));
                 command.ExecuteNonQuery();
@@ -184,7 +184,7 @@ namespace MyLibrary.CL.DomainModel
             long id;
 
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);
@@ -196,7 +196,7 @@ namespace MyLibrary.CL.DomainModel
         public void UpdatePress(Press press)
         {
             string sqlString = "UPDATE Presses SET Name = @Name WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", press.Id));
                 command.Parameters.Add(new SqlParameter("@Name", press.Name));
@@ -207,7 +207,7 @@ namespace MyLibrary.CL.DomainModel
         public void DeletePress(long id)
         {
             string sqlString = "DELETE FROM Presses WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
                 command.ExecuteNonQuery();
@@ -221,16 +221,16 @@ namespace MyLibrary.CL.DomainModel
 
         public IEnumerable<Book> GetAllBooks()
         {
-            List<Book> books = new List<Book>();
+            var books = new List<Book>();
 
             string sqlString = "SELECT Id, AuthorFk, Name, Pages, Price, PressFk FROM Books";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    books.Add(new Book()
+                    books.Add(new Book
                     {
                         Id = Convert.ToInt64(reader["Id"]),
                         AuthorFk = Convert.ToInt64(reader["AuthorFk"]),
@@ -249,7 +249,7 @@ namespace MyLibrary.CL.DomainModel
         {
             string sqlString = "SELECT Id, AuthorFk, Name, Pages, Price, PressFk FROM Books WHERE Id = @Id";
 
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -257,7 +257,7 @@ namespace MyLibrary.CL.DomainModel
                 {
                     // Если нашли
                     if (reader.Read())
-                        return new Book()
+                        return new Book
                         {
                             Id = Convert.ToInt64(reader["Id"]),
                             AuthorFk = Convert.ToInt64(reader["AuthorFk"]),
@@ -276,7 +276,7 @@ namespace MyLibrary.CL.DomainModel
         public long InsertBook(Book book)
         {
             string sqlString = "INSERT INTO Books (AuthorFk, Name, Pages, Price, PressFk) VALUES (@AuthorFk, @Name, @Pages, @Price, @PressFk)";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@AuthorFk", book.AuthorFk));
                 command.Parameters.Add(new SqlParameter("@Name", book.Name));
@@ -289,7 +289,7 @@ namespace MyLibrary.CL.DomainModel
             long id;
 
             string sqlGetIdString = "SELECT @@IDENTITY";
-            using (SqlCommand commandId = new SqlCommand(sqlGetIdString, connection))
+            using (var commandId = new SqlCommand(sqlGetIdString, connection))
             {
                 object obj = commandId.ExecuteScalar();
                 id = Convert.ToInt64(obj);
@@ -301,7 +301,7 @@ namespace MyLibrary.CL.DomainModel
         public void UpdateBook(Book book)
         {
             string sqlString = "UPDATE Books SET AuthorFk = @AuthorFk, Name = @Name, Pages = @Pages, Price = @Price, PressFk = @PressFk WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", book.Id));
                 command.Parameters.Add(new SqlParameter("@AuthorFk", book.AuthorFk));
@@ -316,7 +316,7 @@ namespace MyLibrary.CL.DomainModel
         public void DeleteBook(long id)
         {
             string sqlString = "DELETE FROM Books WHERE Id = @Id";
-            using (SqlCommand command = new SqlCommand(sqlString, connection))
+            using (var command = new SqlCommand(sqlString, connection))
             {
                 command.Parameters.Add(new SqlParameter("@Id", id));
                 command.ExecuteNonQuery();
