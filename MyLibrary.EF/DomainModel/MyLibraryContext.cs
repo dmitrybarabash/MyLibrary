@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using MyLibrary.Common.DomainModel;
 
@@ -19,6 +20,9 @@ namespace MyLibrary.EF.DomainModel
             // Authors
             //
 
+            // Устанавливаем автоинкремент для первичного ключа
+            modelBuilder.Entity<Author>().Property(a => a.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             // Устанавливаем длину строкового поля и характеристику NOT NULL
             modelBuilder.Entity<Author>().Property(a => a.Name).HasMaxLength(50);
             modelBuilder.Entity<Author>().Property(a => a.Name).IsRequired();
@@ -27,12 +31,16 @@ namespace MyLibrary.EF.DomainModel
             modelBuilder.Entity<Author>()
                 .HasMany(a => a.Books)
                 .WithRequired(b => b.Author)
-                .HasForeignKey(b => b.AuthorFk);
+                .HasForeignKey(b => b.AuthorFk)
+                .WillCascadeOnDelete();
 
             //
             // Presses
             //
 
+            // Устанавливаем автоинкремент для первичного ключа
+            modelBuilder.Entity<Press>().Property(p => p.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             // Устанавливаем длину строкового поля и характеристику NOT NULL
             modelBuilder.Entity<Press>().Property(p => p.Name).HasMaxLength(50);
             modelBuilder.Entity<Press>().Property(p => p.Name).IsRequired();
@@ -41,12 +49,16 @@ namespace MyLibrary.EF.DomainModel
             modelBuilder.Entity<Press>()
                 .HasMany(p => p.Books)
                 .WithRequired(b => b.Press)
-                .HasForeignKey(b => b.PressFk);
+                .HasForeignKey(b => b.PressFk)
+                .WillCascadeOnDelete();
 
             //
             // Books
             //
 
+            // Устанавливаем автоинкремент для первичного ключа
+            modelBuilder.Entity<Book>().Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             // Устанавливаем длину строкового поля и характеристику NOT NULL
             modelBuilder.Entity<Book>().Property(b => b.Name).HasMaxLength(100);
             modelBuilder.Entity<Book>().Property(b => b.Name).IsRequired();
