@@ -59,7 +59,7 @@ namespace MyLibrary.Common.Presenters
             {
                 try
                 {
-                    Model.BookRepository.Add(new Book()
+                    Model.BookRepository.Add(new Book
                     {
                         Id = 0,
                         AuthorFk = bookPresenter.AuthorFk,

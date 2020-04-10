@@ -26,7 +26,7 @@ namespace MyLibrary.Common.Presenters
             View.PressSelected += OnPressSelected;
         }
 
-        public string Title { set { ((Form)View).Text = value; } }
+        public string Title { set => ((Form)View).Text = value; }
         public long AuthorFk { get; set; }
         public long PressFk { get; set; }
 

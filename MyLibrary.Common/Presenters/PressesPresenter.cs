@@ -54,7 +54,7 @@ namespace MyLibrary.Common.Presenters
             {
                 try
                 {
-                    var newPress = new Press() { Id = 0, Name = refItemForm.ItemText };
+                    var newPress = new Press { Id = 0, Name = refItemForm.ItemText };
                     Model.PressRepository.Add(newPress);
                 }
                 catch (Exception ex)

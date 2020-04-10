@@ -54,7 +54,7 @@ namespace MyLibrary.Common.Presenters
             {
                 try
                 {
-                    var newAuthor = new Author() { Id = 0, Name = refItemForm.ItemText };
+                    var newAuthor = new Author { Id = 0, Name = refItemForm.ItemText };
                     Model.AuthorRepository.Add(newAuthor);
                 }
                 catch (Exception ex)
