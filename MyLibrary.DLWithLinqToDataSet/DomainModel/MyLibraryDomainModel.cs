@@ -5,28 +5,23 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
     public class MyLibraryDomainModel : IMyLibraryDomainModel
     {
         private readonly IDatabase db;
-        private readonly IRepository<Author> authorRepository;
-        private readonly IRepository<Press> pressRepository;
-        private readonly IRepository<Book> bookRepository;
 
         public MyLibraryDomainModel()
         {
             db = new Database();
-            authorRepository = new AuthorRepository(db);
-            pressRepository = new PressRepository(db);
-            bookRepository = new BookRepository(db);
+            AuthorRepository = new AuthorRepository(db);
+            PressRepository = new PressRepository(db);
+            BookRepository = new BookRepository(db);
         }
 
         #region IMyLibraryDomainModel implementation
 
-        public IRepository<Author> AuthorRepository { get => authorRepository; }
-        public IRepository<Press> PressRepository { get => pressRepository; }
-        public IRepository<Book> BookRepository { get => bookRepository; }
+        public IRepository<Author> AuthorRepository { get; }
+        public IRepository<Press> PressRepository { get; }
+        public IRepository<Book> BookRepository { get; }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             db.Dispose();
-        }
 
         #endregion
     }

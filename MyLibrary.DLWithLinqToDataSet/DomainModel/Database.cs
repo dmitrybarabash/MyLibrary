@@ -270,6 +270,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
                 if (Convert.ToInt64(row["Id"]) == id)
                     row.Delete();
             authorsAdapter.Update(authorsTable);
+
             // Поскольку в БД сработало каскадное удаление и из таблицы Books
             // также были удалены книги удаленного автора, то пересчитываем ее
             ReloadBooks();
@@ -392,6 +393,7 @@ namespace MyLibrary.DLWithLinqToDataSet.DomainModel
                 if (Convert.ToInt64(row["Id"]) == id)
                     row.Delete();
             pressesAdapter.Update(pressesTable);
+
             // Поскольку в БД сработало каскадное удаление и из таблицы Books
             // также были удалены книги удаленного автора, то пересчитываем ее
             ReloadBooks();
