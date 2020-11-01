@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace MyLibrary.Common.Options
 {
@@ -11,20 +12,32 @@ namespace MyLibrary.Common.Options
         {
             get
             {
-                // Если во внешнем config-файле MyLibrary.exe.config указана строка соединения,
-                // берем ее оттуда. Если не указана, то берем ее из вкомпилированного App.config.
-                // Если и там ее нет, то берем дефолтную строку соединения. (На самом деле она там
-                // есть, смотри App.config в exe-проектах. MyLibrary.exe.config создается при
-                // компиляции автоматически на основе App.config.)
+                // Если существует внешний файл appsettings.json и в нем указана строка соединения,
+                // берем ее оттуда. Если не указана, то берем дефолтную строку соединения.
 
                 // Дефолтная строка соединения
                 string defaultConnectionString = "Data Source=(local);Initial Catalog=MyLibrary;Integrated Security=True";
 
-                // Классы ConfigurationManager и ConnectionStringSettings требуют
-                // явного подключения сборки System.Configuration
-                ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["MyLibrary"];
+                // Создаем объект построения конфигурации, которую будем брать из файла appsettings.json
+                var configurationBuilder =
+                    new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json");
+                // Пытаемся создать собственно объект конфигурации, если такой файл существует
+                IConfiguration configuration = null;
+                try
+                {
+                    configuration = configurationBuilder.Build();
+                }
+                catch (FileNotFoundException)
+                {
+                }
 
-                return settings != null ? settings.ConnectionString : defaultConnectionString;
+                // Получаем строку подключения из параметра конфигурации DefaultConnection  или null,
+                // если файла appsettings.json или параметра DefaultConnection в нем не существует
+                string connectionString = configuration?.GetConnectionString("DefaultConnection");
+
+                return !string.IsNullOrEmpty(connectionString) ? connectionString : defaultConnectionString;
             }
         }
     }

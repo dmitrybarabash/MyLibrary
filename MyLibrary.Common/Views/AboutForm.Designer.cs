@@ -87,7 +87,7 @@
             // 
             // pictureBoxLogo
             // 
-            this.pictureBoxLogo.Image = global::MyLibrary.Common.Properties.Resources.MyLibrary;
+            this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
             this.pictureBoxLogo.Location = new System.Drawing.Point(24, 31);
             this.pictureBoxLogo.Name = "pictureBoxLogo";
             this.pictureBoxLogo.Size = new System.Drawing.Size(139, 140);
@@ -107,7 +107,7 @@
             // labelProductName
             // 
             this.labelProductName.AutoSize = true;
-            this.labelProductName.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelProductName.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelProductName.Location = new System.Drawing.Point(183, 22);
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(242, 46);
@@ -123,7 +123,7 @@
             this.ClientSize = new System.Drawing.Size(552, 286);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonOk);
-            this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

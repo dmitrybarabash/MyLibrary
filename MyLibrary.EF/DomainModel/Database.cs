@@ -1,13 +1,27 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using MyLibrary.Common.DomainModel;
+using MyLibrary.Common.Options;
 
 namespace MyLibrary.EF.DomainModel
 {
     public class Database : IDatabase
     {
-        private readonly MyLibraryContext context = new MyLibraryContext();
+        private readonly MyLibraryContext context;
+
+        public Database()
+        {
+            // Создаем объект контекста EF, указываем ему строку соединения и
+            // получаем объект настроек для конструктора объекта контекста EF
+            var options =
+                new DbContextOptionsBuilder<MyLibraryContext>()
+                    .UseSqlServer(Options.ConnectionString)
+                    .Options;
+
+            // Создаем контекст EF
+            context = new MyLibraryContext(options);
+        }
 
         #region IDisposable implementation
 
