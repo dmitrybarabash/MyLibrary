@@ -33,8 +33,7 @@ namespace MyLibrary.Common.Presenters
 
         private void ModifiedHandler()
         {
-            if (Modified != null)
-                Modified(this, EventArgs.Empty);
+            Modified?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnLoaded(object sender, EventArgs e)
@@ -45,10 +44,12 @@ namespace MyLibrary.Common.Presenters
 
         private void OnAdd(object sender, EventArgs e)
         {
-            var refItemForm = new RefItemForm();
-            refItemForm.Text = "Новый автор";
-            refItemForm.GroupBoxText = "Информация о новом авторе";
-            refItemForm.LabelText = "Автор:";
+            var refItemForm = new RefItemForm
+            {
+                Text = "Новый автор",
+                GroupBoxText = "Информация о новом авторе",
+                LabelText = "Автор:"
+            };
 
             if (refItemForm.ShowDialog() == DialogResult.OK)
             {
@@ -89,11 +90,13 @@ namespace MyLibrary.Common.Presenters
             int selectedIndex = View.ListView.SelectedIndices[0];
             Author author = (Author)View.ListView.Items[selectedIndex].Tag;
 
-            var refItemForm = new RefItemForm();
-            refItemForm.Text = "Изменение существующего автора";
-            refItemForm.GroupBoxText = "Информация об авторе";
-            refItemForm.LabelText = "Автор:";
-            refItemForm.ItemText = author.Name;
+            var refItemForm = new RefItemForm
+            {
+                Text = "Изменение существующего автора",
+                GroupBoxText = "Информация об авторе",
+                LabelText = "Автор:",
+                ItemText = author.Name
+            };
 
             if (refItemForm.ShowDialog() == DialogResult.OK)
             {
