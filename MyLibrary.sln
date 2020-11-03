@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.EF", "MyLibrary.WinForms.EF\MyLibrary.WinForms.EF.csproj", "{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common", "MyLibrary.Common\MyLibrary.Common.csproj", "{F84FCA85-95B1-4E44-905E-5316BE2B98A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.CL", "MyLibrary.CL\MyLibrary.CL.csproj", "{FBF66586-DEC8-4B77-9210-AD45E2926F19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.Common", "MyLibrary.WinForms.Common\MyLibrary.WinForms.Common.csproj", "{E2C23DE5-0ECD-4D1C-943C-2268D1054917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.DL", "MyLibrary.DL\MyLibrary.DL.csproj", "{BC2B3250-5457-4DA0-B72B-D49079FFD3C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.CL", "MyLibrary.WinForms.CL\MyLibrary.WinForms.CL.csproj", "{FBF66586-DEC8-4B77-9210-AD45E2926F19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.DLWithLinqToDataSet", "MyLibrary.DLWithLinqToDataSet\MyLibrary.DLWithLinqToDataSet.csproj", "{FE6D3AF8-F434-457D-898F-3BE8395ABB96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.DL", "MyLibrary.WinForms.DL\MyLibrary.WinForms.DL.csproj", "{BC2B3250-5457-4DA0-B72B-D49079FFD3C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.EF", "MyLibrary.EF\MyLibrary.EF.csproj", "{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.DLWithLinqToDataSet", "MyLibrary.WinForms.DLWithLinqToDataSet\MyLibrary.WinForms.DLWithLinqToDataSet.csproj", "{FE6D3AF8-F434-457D-898F-3BE8395ABB96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,5 +88,17 @@ Global
 		{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}.Release|x64.Build.0 = Release|Any CPU
 		{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}.Release|x86.ActiveCfg = Release|Any CPU
 		{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}.Release|x86.Build.0 = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|x64.Build.0 = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Debug|x86.Build.0 = Debug|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x64.ActiveCfg = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x64.Build.0 = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x86.ActiveCfg = Release|Any CPU
+		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
