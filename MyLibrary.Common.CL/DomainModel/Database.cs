@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Options;
 
-namespace MyLibrary.WinForms.CL.DomainModel
+namespace MyLibrary.Common.CL.DomainModel
 {
     public class Database : IDatabase
     {
@@ -13,7 +13,7 @@ namespace MyLibrary.WinForms.CL.DomainModel
 
         public Database()
         {
-            connection.ConnectionString = Options.ConnectionString;
+            connection.ConnectionString = GlobalOptions.ConnectionString;
             connection.Open();
         }
 

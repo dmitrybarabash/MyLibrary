@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyLibrary.Common.DomainModel;
 
-namespace MyLibrary.WinForms.EF.DomainModel
+namespace MyLibrary.Common.EF.DomainModel
 {
     public class MyLibraryContext : DbContext
     {

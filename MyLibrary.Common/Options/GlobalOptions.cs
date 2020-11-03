@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace MyLibrary.Common.Options
 {
-    public static class Options
+    public static class GlobalOptions
     {
         /// <summary>
         /// Возвращает строку соединения с БД.

@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.EF", "MyLibrary.WinForms.EF\MyLibrary.WinForms.EF.csproj", "{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common", "MyLibrary.Common\MyLibrary.Common.csproj", "{F84FCA85-95B1-4E44-905E-5316BE2B98A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common.CL", "MyLibrary.Common.CL\MyLibrary.Common.CL.csproj", "{C62A0168-0909-4707-A443-E25DF0096DE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common.DL", "MyLibrary.Common.DL\MyLibrary.Common.DL.csproj", "{25333C89-997E-453A-BE60-59245F8331ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common.DLWithLinqToDataSet", "MyLibrary.Common.DLWithLinqToDataSet\MyLibrary.Common.DLWithLinqToDataSet.csproj", "{EE047296-6E6C-426C-91A8-878E03F31767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.Common.EF", "MyLibrary.Common.EF\MyLibrary.Common.EF.csproj", "{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.Common", "MyLibrary.WinForms.Common\MyLibrary.WinForms.Common.csproj", "{E2C23DE5-0ECD-4D1C-943C-2268D1054917}"
 EndProject
@@ -14,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.DL", "MyLibrary.WinForms.DL\MyLibrary.WinForms.DL.csproj", "{BC2B3250-5457-4DA0-B72B-D49079FFD3C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.DLWithLinqToDataSet", "MyLibrary.WinForms.DLWithLinqToDataSet\MyLibrary.WinForms.DLWithLinqToDataSet.csproj", "{FE6D3AF8-F434-457D-898F-3BE8395ABB96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary.WinForms.EF", "MyLibrary.WinForms.EF\MyLibrary.WinForms.EF.csproj", "{9F02A9EC-9E72-4C79-B594-2D85ED7AE750}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,5 +108,53 @@ Global
 		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x64.Build.0 = Release|Any CPU
 		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x86.ActiveCfg = Release|Any CPU
 		{E2C23DE5-0ECD-4D1C-943C-2268D1054917}.Release|x86.Build.0 = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|x64.Build.0 = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Debug|x86.Build.0 = Debug|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|x64.ActiveCfg = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|x64.Build.0 = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|x86.ActiveCfg = Release|Any CPU
+		{C62A0168-0909-4707-A443-E25DF0096DE8}.Release|x86.Build.0 = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Debug|x86.Build.0 = Debug|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|x64.Build.0 = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{25333C89-997E-453A-BE60-59245F8331ED}.Release|x86.Build.0 = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|x64.Build.0 = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Debug|x86.Build.0 = Debug|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|x64.ActiveCfg = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|x64.Build.0 = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8C93A7E-C919-4D8E-AFE3-80792206DEC7}.Release|x86.Build.0 = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|x64.Build.0 = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE047296-6E6C-426C-91A8-878E03F31767}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

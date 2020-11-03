@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MyLibrary.Common\MyLibrary.Common.csproj" />
+    <ProjectReference Include="..\MyLibrary.Common.DL\MyLibrary.Common.DL.csproj" />
     <ProjectReference Include="..\MyLibrary.WinForms.Common\MyLibrary.WinForms.Common.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using MyLibrary.WinForms.Common.Presenters;
 using MyLibrary.WinForms.Common.Views;
-using MyLibrary.WinForms.EF.DomainModel;
+using MyLibrary.Common.EF.DomainModel;
 
 namespace MyLibrary.WinForms.EF
 {

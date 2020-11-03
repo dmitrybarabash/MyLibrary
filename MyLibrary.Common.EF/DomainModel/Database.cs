@@ -4,7 +4,7 @@ using System.Linq;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Options;
 
-namespace MyLibrary.WinForms.EF.DomainModel
+namespace MyLibrary.Common.EF.DomainModel
 {
     public class Database : IDatabase
     {
@@ -16,7 +16,7 @@ namespace MyLibrary.WinForms.EF.DomainModel
             // получаем объект настроек для конструктора объекта контекста EF
             var options =
                 new DbContextOptionsBuilder<MyLibraryContext>()
-                    .UseSqlServer(Options.ConnectionString)
+                    .UseSqlServer(GlobalOptions.ConnectionString)
                     .Options;
 
             // Создаем контекст EF

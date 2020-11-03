@@ -6,7 +6,7 @@ using System.Linq;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Options;
 
-namespace MyLibrary.WinForms.DLWithLinqToDataSet.DomainModel
+namespace MyLibrary.Common.DLWithLinqToDataSet.DomainModel
 {
     public class Database : IDatabase
     {
@@ -18,7 +18,7 @@ namespace MyLibrary.WinForms.DLWithLinqToDataSet.DomainModel
 
         public Database()
         {
-            connection.ConnectionString = Options.ConnectionString;
+            connection.ConnectionString = GlobalOptions.ConnectionString;
             connection.Open();
 
             //

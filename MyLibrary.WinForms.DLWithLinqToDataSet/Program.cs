@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using MyLibrary.WinForms.Common.Presenters;
 using MyLibrary.WinForms.Common.Views;
-using MyLibrary.WinForms.DLWithLinqToDataSet.DomainModel;
+using MyLibrary.Common.DLWithLinqToDataSet.DomainModel;
 
 namespace MyLibrary.WinForms.DLWithLinqToDataSet
 {

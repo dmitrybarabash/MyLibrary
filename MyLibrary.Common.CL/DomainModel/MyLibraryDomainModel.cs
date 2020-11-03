@@ -1,6 +1,6 @@
 ﻿using MyLibrary.Common.DomainModel;
 
-namespace MyLibrary.WinForms.DLWithLinqToDataSet.DomainModel
+namespace MyLibrary.Common.CL.DomainModel
 {
     public class MyLibraryDomainModel : IMyLibraryDomainModel
     {
