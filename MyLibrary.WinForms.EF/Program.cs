@@ -14,10 +14,11 @@ namespace MyLibrary.WinForms.EF
         [STAThread]
         static void Main()
         {
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            using (MyLibraryDomainModel myLibraryDomainModel = new MyLibraryDomainModel())
+            using (var myLibraryDomainModel = new MyLibraryDomainModel())
             {
                 var mainPresenter = new MainPresenter(myLibraryDomainModel, new MainForm());
                 Application.Run((Form)mainPresenter.View);
