@@ -12,12 +12,26 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void linkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(linkLabelWebsite.Text);
+            // Открываем веб-ссылку. Вместо простого Process.Start("...")
+            // используем workaround из-за вот этого бага в .NET Core:
+            // https://github.com/dotnet/corefx/issues/10361.
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = linkLabelWebsite.Text,
+                UseShellExecute = true
+            });
         }
 
         private void linkLabelEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:" + linkLabelEmail.Text);
+            // Открываем почтовую ссылку. Вместо простого Process.Start("...")
+            // используем workaround из-за вот этого бага в .NET Core:
+            // https://github.com/dotnet/corefx/issues/10361.
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = $"mailto:{linkLabelEmail.Text}",
+                UseShellExecute = true
+            });
         }
     }
 }
