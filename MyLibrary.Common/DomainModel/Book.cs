@@ -1,4 +1,6 @@
-﻿namespace MyLibrary.Common.DomainModel
+﻿#nullable disable
+
+namespace MyLibrary.Common.DomainModel
 {
     public class Book
     {
