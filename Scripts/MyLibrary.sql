@@ -3,7 +3,7 @@
 IF DB_ID('MyLibrary') IS NOT NULL
 BEGIN
 	USE master
-    ALTER DATABASE MyLibrary SET single_user with rollback immediate;
+    ALTER DATABASE MyLibrary SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
     DROP DATABASE MyLibrary;
 END
 GO
