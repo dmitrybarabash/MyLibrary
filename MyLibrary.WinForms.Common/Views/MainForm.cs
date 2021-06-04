@@ -31,7 +31,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void LoadedHandler(object sender, EventArgs e)
         {
-            if (Loaded != null)
+            if (Loaded is not null)
                 Loaded(this, EventArgs.Empty);
             ScaleListViewColumns();
         }
@@ -40,7 +40,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void AddBookHandler(object sender, EventArgs e)
         {
-            if (AddBook != null)
+            if (AddBook is not null)
                 AddBook(this, EventArgs.Empty);
         }
 
@@ -48,7 +48,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void EditBookHandler(object sender, EventArgs e)
         {
-            if (EditBook != null)
+            if (EditBook is not null)
                 EditBook(this, EventArgs.Empty);
         }
 
@@ -56,7 +56,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void DeleteBookHandler(object sender, EventArgs e)
         {
-            if (DeleteBook != null)
+            if (DeleteBook is not null)
                 DeleteBook(this, EventArgs.Empty);
         }
 
@@ -64,7 +64,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void EditAuthorsHandler(object sender, EventArgs e)
         {
-            if (EditAuthors != null)
+            if (EditAuthors is not null)
                 EditAuthors(this, EventArgs.Empty);
         }
 
@@ -72,7 +72,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void EditPressesHandler(object sender, EventArgs e)
         {
-            if (EditPresses != null)
+            if (EditPresses is not null)
                 EditPresses(this, EventArgs.Empty);
         }
 

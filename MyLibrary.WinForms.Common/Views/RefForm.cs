@@ -25,7 +25,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void LoadedHandler(object sender, EventArgs e)
         {
-            if (Loaded != null)
+            if (Loaded is not null)
                 Loaded(this, EventArgs.Empty);
         }
 
@@ -33,7 +33,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void AddHandler(object sender, EventArgs e)
         {
-            if (Add != null)
+            if (Add is not null)
                 Add(this, EventArgs.Empty);
         }
 
@@ -41,7 +41,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void EditHandler(object sender, EventArgs e)
         {
-            if (Edit != null)
+            if (Edit is not null)
                 Edit(this, EventArgs.Empty);
         }
 
@@ -49,7 +49,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void DeleteHandler(object sender, EventArgs e)
         {
-            if (Delete != null)
+            if (Delete is not null)
                 Delete(this, EventArgs.Empty);
         }
 

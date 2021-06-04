@@ -38,7 +38,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void LoadedHandler(object sender, EventArgs e)
         {
-            if (Loaded != null)
+            if (Loaded is not null)
                 Loaded(this, EventArgs.Empty);
         }
 
@@ -46,7 +46,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void AuthorSelectedHandler(object sender, EventArgs e)
         {
-            if (AuthorSelected != null)
+            if (AuthorSelected is not null)
                 AuthorSelected(this, EventArgs.Empty);
         }
 
@@ -54,7 +54,7 @@ namespace MyLibrary.WinForms.Common.Views
 
         private void PressSelectedHandler(object sender, EventArgs e)
         {
-            if (PressSelected != null)
+            if (PressSelected is not null)
                 PressSelected(this, EventArgs.Empty);
         }
 
