@@ -33,7 +33,7 @@ namespace MyLibrary.WinForms.Common.Presenters
 
         private void ModifiedHandler()
         {
-            if (Modified != null)
+            if (Modified is not null)
                 Modified(this, EventArgs.Empty);
         }
 

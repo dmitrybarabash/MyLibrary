@@ -64,7 +64,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void UpdateAuthor(Author author)
         {
             Author a = context.Authors.Find(author.Id);
-            if (a != null)
+            if (a is not null)
             {
                 a.Name = author.Name;
                 context.Entry(a).State = EntityState.Modified;
@@ -75,7 +75,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void DeleteAuthor(long id)
         {
             Author author = context.Authors.Find(id);
-            if (author != null)
+            if (author is not null)
             {
                 context.Authors.Remove(author);
                 context.SaveChanges();
@@ -113,7 +113,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void UpdatePress(Press press)
         {
             Press p = context.Presses.Find(press.Id);
-            if (p != null)
+            if (p is not null)
             {
                 p.Name = press.Name;
                 context.Entry(p).State = EntityState.Modified;
@@ -124,7 +124,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void DeletePress(long id)
         {
             Press press = context.Presses.Find(id);
-            if (press != null)
+            if (press is not null)
             {
                 context.Presses.Remove(press);
                 context.SaveChanges();
@@ -162,7 +162,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void UpdateBook(Book book)
         {
             Book b = context.Books.Find(book.Id);
-            if (b != null)
+            if (b is not null)
             {
                 b.Name = book.Name;
                 b.AuthorFk = book.AuthorFk;
@@ -177,7 +177,7 @@ namespace MyLibrary.Common.EF.DomainModel
         public void DeleteBook(long id)
         {
             Book book = context.Books.Find(id);
-            if (book != null)
+            if (book is not null)
             {
                 context.Books.Remove(book);
                 context.SaveChanges();

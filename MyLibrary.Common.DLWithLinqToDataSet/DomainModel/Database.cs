@@ -198,7 +198,7 @@ namespace MyLibrary.Common.DLWithLinqToDataSet.DomainModel
                 .SingleOrDefault();
 
             return
-                dataRow == null ?
+                dataRow is null ?
                 null :              // Если не нашли
                 new Author          // Если нашли
                 {
@@ -321,7 +321,7 @@ namespace MyLibrary.Common.DLWithLinqToDataSet.DomainModel
                  select row)
                 .SingleOrDefault();
 
-            return dataRow == null ?
+            return dataRow is null ?
                 null :              // Если не нашли
                 new Press           // Если нашли
                 {
@@ -452,7 +452,7 @@ namespace MyLibrary.Common.DLWithLinqToDataSet.DomainModel
                  select row)
                 .SingleOrDefault();
 
-            return dataRow == null ?
+            return dataRow is null ?
                 null :              // Если не нашли
                 new Book            // Если нашли
                 {
