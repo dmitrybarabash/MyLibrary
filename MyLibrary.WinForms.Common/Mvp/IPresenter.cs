@@ -1,7 +1,6 @@
-﻿namespace MyLibrary.WinForms.Common.Mvp
+﻿namespace MyLibrary.WinForms.Common.Mvp;
+
+public interface IPresenter<T> where T : IView
 {
-    public interface IPresenter<T> where T : IView
-    {
-        T View { get; set; }
-    }
+    T View { get; set; }
 }

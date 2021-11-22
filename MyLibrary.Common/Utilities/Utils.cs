@@ -1,9 +1,8 @@
 ﻿using NLog;
 
-namespace MyLibrary.Common.Utilities
+namespace MyLibrary.Common.Utilities;
+
+public static class Utils
 {
-    public static class Utils
-    {
-        public static Logger Log { get; } = LogManager.GetCurrentClassLogger();
-    }
+    public static Logger Log { get; } = LogManager.GetCurrentClassLogger();
 }

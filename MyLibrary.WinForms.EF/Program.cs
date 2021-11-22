@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
+using MyLibrary.Common.EF.DomainModel;
 using MyLibrary.WinForms.Common.Presenters;
 using MyLibrary.WinForms.Common.Views;
-using MyLibrary.Common.EF.DomainModel;
 
-namespace MyLibrary.WinForms.EF
+namespace MyLibrary.WinForms.EF;
+
+static class Program
 {
-    static class Program
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+        ApplicationConfiguration.Initialize();
 
-            using (var myLibraryDomainModel = new MyLibraryDomainModel())
-            {
-                var mainPresenter = new MainPresenter(myLibraryDomainModel, new MainForm());
-                Application.Run((Form)mainPresenter.View);
-            }
-        }
+        using var myLibraryDomainModel = new MyLibraryDomainModel();
+        var mainPresenter = new MainPresenter(myLibraryDomainModel, new MainForm());
+        Application.Run((Form)mainPresenter.View);
     }
 }

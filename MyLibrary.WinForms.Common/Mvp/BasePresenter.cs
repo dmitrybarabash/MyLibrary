@@ -1,7 +1,6 @@
-﻿namespace MyLibrary.WinForms.Common.Mvp
+﻿namespace MyLibrary.WinForms.Common.Mvp;
+
+public abstract class BasePresenter<T> : IPresenter<T> where T : IView
 {
-    public abstract class BasePresenter<T> : IPresenter<T> where T : IView
-    {
-        public T View { get; set; }
-    }
+    public T View { get; set; }
 }

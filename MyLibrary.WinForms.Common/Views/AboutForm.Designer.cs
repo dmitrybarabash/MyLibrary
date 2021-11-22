@@ -68,7 +68,7 @@
             this.linkLabelWebsite.AutoSize = true;
             this.linkLabelWebsite.Location = new System.Drawing.Point(189, 118);
             this.linkLabelWebsite.Name = "linkLabelWebsite";
-            this.linkLabelWebsite.Size = new System.Drawing.Size(179, 17);
+            this.linkLabelWebsite.Size = new System.Drawing.Size(176, 17);
             this.linkLabelWebsite.TabIndex = 3;
             this.linkLabelWebsite.TabStop = true;
             this.linkLabelWebsite.Text = "https://www.barabash.com";
@@ -102,7 +102,7 @@
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(289, 17);
             this.labelCopyright.TabIndex = 1;
-            this.labelCopyright.Text = "Copyright (c) 2015-2020, Дмитрий Барабаш";
+            this.labelCopyright.Text = "Copyright (c) 2015-2021, Дмитрий Барабаш";
             // 
             // labelProductName
             // 

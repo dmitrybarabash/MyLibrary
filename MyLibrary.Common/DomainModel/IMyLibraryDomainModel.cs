@@ -1,13 +1,10 @@
-﻿#nullable disable
+﻿using System;
 
-using System;
+namespace MyLibrary.Common.DomainModel;
 
-namespace MyLibrary.Common.DomainModel
+public interface IMyLibraryDomainModel : IDisposable
 {
-    public interface IMyLibraryDomainModel : IDisposable
-    {
-        IRepository<Author> AuthorRepository { get; }
-        IRepository<Press> PressRepository { get; }
-        IRepository<Book> BookRepository { get; }
-    }
+    IRepository<Author> AuthorRepository { get; }
+    IRepository<Press> PressRepository { get; }
+    IRepository<Book> BookRepository { get; }
 }

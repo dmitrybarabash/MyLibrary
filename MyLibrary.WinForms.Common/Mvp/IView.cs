@@ -1,6 +1,5 @@
-﻿namespace MyLibrary.WinForms.Common.Mvp
+﻿namespace MyLibrary.WinForms.Common.Mvp;
+
+public interface IView
 {
-    public interface IView
-    {
-    }
 }
