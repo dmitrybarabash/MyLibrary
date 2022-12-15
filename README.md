@@ -1,6 +1,6 @@
 # MyLibrary Application
 
-**MyLibrary application** is a demo project that is written in .NET 6 and illustrates working with:
+**MyLibrary application** is a demo project that is written in .NET 7 and illustrates working with:
 
 #### Database engines:
 
