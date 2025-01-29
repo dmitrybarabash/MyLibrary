@@ -7,7 +7,7 @@ namespace MyLibrary.Common.EF.DomainModel
     {
         public MyLibraryContext(DbContextOptions<MyLibraryContext> options) : base(options)
         {
-            // Если БД нет, то создаем ее
+            // Р•СЃР»Рё Р‘Р” РЅРµС‚, С‚Рѕ СЃРѕР·РґР°РµРј РµРµ
             Database.EnsureCreated();
         }
 
@@ -15,21 +15,21 @@ namespace MyLibrary.Common.EF.DomainModel
         public DbSet<Press> Presses { get; set; }
         public DbSet<Book> Books { get; set; }
 
-        // При помощи Fluent API описываем те детали модели,
-        // которые выходят за дефолтные установки Entity Framework
+        // РџСЂРё РїРѕРјРѕС‰Рё Fluent API РѕРїРёСЃС‹РІР°РµРј С‚Рµ РґРµС‚Р°Р»Рё РјРѕРґРµР»Рё,
+        // РєРѕС‚РѕСЂС‹Рµ РІС‹С…РѕРґСЏС‚ Р·Р° РґРµС„РѕР»С‚РЅС‹Рµ СѓСЃС‚Р°РЅРѕРІРєРё Entity Framework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //
             // Authors
             //
 
-            // Устанавливаем автоинкремент для первичного ключа
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р°РІС‚РѕРёРЅРєСЂРµРјРµРЅС‚ РґР»СЏ РїРµСЂРІРёС‡РЅРѕРіРѕ РєР»СЋС‡Р°
             modelBuilder.Entity<Author>().Property(a => a.Id).ValueGeneratedOnAdd();
-            // Устанавливаем длину строкового поля и характеристику NOT NULL
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР»РёРЅСѓ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїРѕР»СЏ Рё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєСѓ NOT NULL
             modelBuilder.Entity<Author>().Property(a => a.Name).HasMaxLength(50);
             modelBuilder.Entity<Author>().Property(a => a.Name).IsRequired();
-            // Устанавливаем ссылочную целостность для связи "один-ко-многим"
-            // между таблицами Authors и Books и внешний ключ в таблице Books
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃСЃС‹Р»РѕС‡РЅСѓСЋ С†РµР»РѕСЃС‚РЅРѕСЃС‚СЊ РґР»СЏ СЃРІСЏР·Рё "РѕРґРёРЅ-РєРѕ-РјРЅРѕРіРёРј"
+            // РјРµР¶РґСѓ С‚Р°Р±Р»РёС†Р°РјРё Authors Рё Books Рё РІРЅРµС€РЅРёР№ РєР»СЋС‡ РІ С‚Р°Р±Р»РёС†Рµ Books
             modelBuilder.Entity<Author>()
                 .HasMany(a => a.Books)
                 .WithOne(b => b.Author)
@@ -40,13 +40,13 @@ namespace MyLibrary.Common.EF.DomainModel
             // Presses
             //
 
-            // Устанавливаем автоинкремент для первичного ключа
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р°РІС‚РѕРёРЅРєСЂРµРјРµРЅС‚ РґР»СЏ РїРµСЂРІРёС‡РЅРѕРіРѕ РєР»СЋС‡Р°
             modelBuilder.Entity<Press>().Property(p => p.Id).ValueGeneratedOnAdd();
-            // Устанавливаем длину строкового поля и характеристику NOT NULL
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР»РёРЅСѓ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїРѕР»СЏ Рё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєСѓ NOT NULL
             modelBuilder.Entity<Press>().Property(p => p.Name).HasMaxLength(50);
             modelBuilder.Entity<Press>().Property(p => p.Name).IsRequired();
-            // Устанавливаем ссылочную целостность для связи "один-ко-многим"
-            // между таблицами Presses и Books и внешний ключ в таблице Books
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃСЃС‹Р»РѕС‡РЅСѓСЋ С†РµР»РѕСЃС‚РЅРѕСЃС‚СЊ РґР»СЏ СЃРІСЏР·Рё "РѕРґРёРЅ-РєРѕ-РјРЅРѕРіРёРј"
+            // РјРµР¶РґСѓ С‚Р°Р±Р»РёС†Р°РјРё Presses Рё Books Рё РІРЅРµС€РЅРёР№ РєР»СЋС‡ РІ С‚Р°Р±Р»РёС†Рµ Books
             modelBuilder.Entity<Press>()
                 .HasMany(p => p.Books)
                 .WithOne(b => b.Press)
@@ -57,12 +57,12 @@ namespace MyLibrary.Common.EF.DomainModel
             // Books
             //
 
-            // Устанавливаем автоинкремент для первичного ключа
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р°РІС‚РѕРёРЅРєСЂРµРјРµРЅС‚ РґР»СЏ РїРµСЂРІРёС‡РЅРѕРіРѕ РєР»СЋС‡Р°
             modelBuilder.Entity<Book>().Property(b => b.Id).ValueGeneratedOnAdd();
-            // Устанавливаем длину строкового поля и характеристику NOT NULL
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР»РёРЅСѓ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїРѕР»СЏ Рё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєСѓ NOT NULL
             modelBuilder.Entity<Book>().Property(b => b.Name).HasMaxLength(100);
             modelBuilder.Entity<Book>().Property(b => b.Name).IsRequired();
-            // Указываем точность для поля типа decimal
+            // РЈРєР°Р·С‹РІР°РµРј С‚РѕС‡РЅРѕСЃС‚СЊ РґР»СЏ РїРѕР»СЏ С‚РёРїР° decimal
             modelBuilder.Entity<Book>().Property(b => b.Price).HasColumnType("decimal(18,2)");
 
 
