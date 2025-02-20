@@ -29,220 +29,200 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookForm));
-            this.groupBoxBook = new System.Windows.Forms.GroupBox();
-            this.numericUpDownPrice = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownPages = new System.Windows.Forms.NumericUpDown();
-            this.comboBoxPress = new System.Windows.Forms.ComboBox();
-            this.comboBoxAuthor = new System.Windows.Forms.ComboBox();
-            this.labelPrice = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.labelPages = new System.Windows.Forms.Label();
-            this.labelPress = new System.Windows.Forms.Label();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelAuthor = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.groupBoxBook.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPages)).BeginInit();
-            this.SuspendLayout();
-            //
+            groupBoxBook = new System.Windows.Forms.GroupBox();
+            numericUpDownPrice = new System.Windows.Forms.NumericUpDown();
+            numericUpDownPages = new System.Windows.Forms.NumericUpDown();
+            comboBoxPress = new System.Windows.Forms.ComboBox();
+            comboBoxAuthor = new System.Windows.Forms.ComboBox();
+            labelPrice = new System.Windows.Forms.Label();
+            textBoxName = new System.Windows.Forms.TextBox();
+            labelPages = new System.Windows.Forms.Label();
+            labelPress = new System.Windows.Forms.Label();
+            labelName = new System.Windows.Forms.Label();
+            labelAuthor = new System.Windows.Forms.Label();
+            buttonCancel = new System.Windows.Forms.Button();
+            buttonOK = new System.Windows.Forms.Button();
+            groupBoxBook.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPages).BeginInit();
+            SuspendLayout();
+            // 
             // groupBoxBook
-            //
-            this.groupBoxBook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxBook.Controls.Add(this.numericUpDownPrice);
-            this.groupBoxBook.Controls.Add(this.numericUpDownPages);
-            this.groupBoxBook.Controls.Add(this.comboBoxPress);
-            this.groupBoxBook.Controls.Add(this.comboBoxAuthor);
-            this.groupBoxBook.Controls.Add(this.labelPrice);
-            this.groupBoxBook.Controls.Add(this.textBoxName);
-            this.groupBoxBook.Controls.Add(this.labelPages);
-            this.groupBoxBook.Controls.Add(this.labelPress);
-            this.groupBoxBook.Controls.Add(this.labelName);
-            this.groupBoxBook.Controls.Add(this.labelAuthor);
-            this.groupBoxBook.Location = new System.Drawing.Point(24, 20);
-            this.groupBoxBook.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBoxBook.Name = "groupBoxBook";
-            this.groupBoxBook.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxBook.Size = new System.Drawing.Size(637, 231);
-            this.groupBoxBook.TabIndex = 0;
-            this.groupBoxBook.TabStop = false;
-            this.groupBoxBook.Text = "Информация о книге";
-            //
+            // 
+            groupBoxBook.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBoxBook.Controls.Add(numericUpDownPrice);
+            groupBoxBook.Controls.Add(numericUpDownPages);
+            groupBoxBook.Controls.Add(comboBoxPress);
+            groupBoxBook.Controls.Add(comboBoxAuthor);
+            groupBoxBook.Controls.Add(labelPrice);
+            groupBoxBook.Controls.Add(textBoxName);
+            groupBoxBook.Controls.Add(labelPages);
+            groupBoxBook.Controls.Add(labelPress);
+            groupBoxBook.Controls.Add(labelName);
+            groupBoxBook.Controls.Add(labelAuthor);
+            groupBoxBook.Location = new System.Drawing.Point(24, 25);
+            groupBoxBook.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            groupBoxBook.Name = "groupBoxBook";
+            groupBoxBook.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            groupBoxBook.Size = new System.Drawing.Size(637, 289);
+            groupBoxBook.TabIndex = 0;
+            groupBoxBook.TabStop = false;
+            groupBoxBook.Text = "Информация о книге";
+            // 
             // numericUpDownPrice
-            //
-            this.numericUpDownPrice.DecimalPlaces = 2;
-            this.numericUpDownPrice.Location = new System.Drawing.Point(165, 142);
-            this.numericUpDownPrice.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDownPrice.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDownPrice.Name = "numericUpDownPrice";
-            this.numericUpDownPrice.Size = new System.Drawing.Size(100, 22);
-            this.numericUpDownPrice.TabIndex = 7;
-            //
+            // 
+            numericUpDownPrice.DecimalPlaces = 2;
+            numericUpDownPrice.Location = new System.Drawing.Point(165, 178);
+            numericUpDownPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            numericUpDownPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numericUpDownPrice.Name = "numericUpDownPrice";
+            numericUpDownPrice.Size = new System.Drawing.Size(100, 27);
+            numericUpDownPrice.TabIndex = 7;
+            // 
             // numericUpDownPages
-            //
-            this.numericUpDownPages.Location = new System.Drawing.Point(165, 105);
-            this.numericUpDownPages.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDownPages.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.numericUpDownPages.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDownPages.Name = "numericUpDownPages";
-            this.numericUpDownPages.Size = new System.Drawing.Size(100, 22);
-            this.numericUpDownPages.TabIndex = 5;
-            this.numericUpDownPages.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            //
+            // 
+            numericUpDownPages.Location = new System.Drawing.Point(165, 131);
+            numericUpDownPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            numericUpDownPages.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
+            numericUpDownPages.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDownPages.Name = "numericUpDownPages";
+            numericUpDownPages.Size = new System.Drawing.Size(100, 27);
+            numericUpDownPages.TabIndex = 5;
+            numericUpDownPages.Value = new decimal(new int[] { 300, 0, 0, 0 });
+            // 
             // comboBoxPress
-            //
-            this.comboBoxPress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxPress.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPress.FormattingEnabled = true;
-            this.comboBoxPress.Location = new System.Drawing.Point(165, 181);
-            this.comboBoxPress.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBoxPress.Name = "comboBoxPress";
-            this.comboBoxPress.Size = new System.Drawing.Size(437, 24);
-            this.comboBoxPress.TabIndex = 9;
-            this.comboBoxPress.SelectedIndexChanged += new System.EventHandler(this.PressSelectedHandler);
-            //
+            // 
+            comboBoxPress.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comboBoxPress.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxPress.FormattingEnabled = true;
+            comboBoxPress.Location = new System.Drawing.Point(165, 226);
+            comboBoxPress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            comboBoxPress.Name = "comboBoxPress";
+            comboBoxPress.Size = new System.Drawing.Size(437, 28);
+            comboBoxPress.TabIndex = 9;
+            comboBoxPress.SelectedIndexChanged += PressSelectedHandler;
+            // 
             // comboBoxAuthor
-            //
-            this.comboBoxAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxAuthor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAuthor.FormattingEnabled = true;
-            this.comboBoxAuthor.Location = new System.Drawing.Point(165, 33);
-            this.comboBoxAuthor.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBoxAuthor.Name = "comboBoxAuthor";
-            this.comboBoxAuthor.Size = new System.Drawing.Size(437, 24);
-            this.comboBoxAuthor.TabIndex = 1;
-            this.comboBoxAuthor.SelectedIndexChanged += new System.EventHandler(this.AuthorSelectedHandler);
-            //
+            // 
+            comboBoxAuthor.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comboBoxAuthor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxAuthor.FormattingEnabled = true;
+            comboBoxAuthor.Location = new System.Drawing.Point(165, 41);
+            comboBoxAuthor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            comboBoxAuthor.Name = "comboBoxAuthor";
+            comboBoxAuthor.Size = new System.Drawing.Size(437, 28);
+            comboBoxAuthor.TabIndex = 1;
+            comboBoxAuthor.SelectedIndexChanged += AuthorSelectedHandler;
+            // 
             // labelPrice
-            //
-            this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(33, 147);
-            this.labelPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(47, 17);
-            this.labelPrice.TabIndex = 6;
-            this.labelPrice.Text = "Цена:";
-            //
+            // 
+            labelPrice.AutoSize = true;
+            labelPrice.Location = new System.Drawing.Point(33, 184);
+            labelPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelPrice.Name = "labelPrice";
+            labelPrice.Size = new System.Drawing.Size(48, 20);
+            labelPrice.TabIndex = 6;
+            labelPrice.Text = "Цена:";
+            // 
             // textBoxName
-            //
-            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxName.Location = new System.Drawing.Point(165, 69);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(437, 22);
-            this.textBoxName.TabIndex = 3;
-            this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
-            //
+            // 
+            textBoxName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxName.Location = new System.Drawing.Point(165, 86);
+            textBoxName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            textBoxName.Name = "textBoxName";
+            textBoxName.Size = new System.Drawing.Size(437, 27);
+            textBoxName.TabIndex = 3;
+            textBoxName.TextChanged += textBoxName_TextChanged;
+            // 
             // labelPages
-            //
-            this.labelPages.AutoSize = true;
-            this.labelPages.Location = new System.Drawing.Point(33, 110);
-            this.labelPages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPages.Name = "labelPages";
-            this.labelPages.Size = new System.Drawing.Size(78, 17);
-            this.labelPages.TabIndex = 4;
-            this.labelPages.Text = "Страницы:";
-            //
+            // 
+            labelPages.AutoSize = true;
+            labelPages.Location = new System.Drawing.Point(33, 138);
+            labelPages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelPages.Name = "labelPages";
+            labelPages.Size = new System.Drawing.Size(82, 20);
+            labelPages.TabIndex = 4;
+            labelPages.Text = "Страницы:";
+            // 
             // labelPress
-            //
-            this.labelPress.AutoSize = true;
-            this.labelPress.Location = new System.Drawing.Point(33, 185);
-            this.labelPress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPress.Name = "labelPress";
-            this.labelPress.Size = new System.Drawing.Size(104, 17);
-            this.labelPress.TabIndex = 8;
-            this.labelPress.Text = "Издательство:";
-            //
+            // 
+            labelPress.AutoSize = true;
+            labelPress.Location = new System.Drawing.Point(33, 231);
+            labelPress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelPress.Name = "labelPress";
+            labelPress.Size = new System.Drawing.Size(106, 20);
+            labelPress.TabIndex = 8;
+            labelPress.Text = "Издательство:";
+            // 
             // labelName
-            //
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(33, 74);
-            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(76, 17);
-            this.labelName.TabIndex = 2;
-            this.labelName.Text = "Название:";
-            //
+            // 
+            labelName.AutoSize = true;
+            labelName.Location = new System.Drawing.Point(33, 92);
+            labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelName.Name = "labelName";
+            labelName.Size = new System.Drawing.Size(80, 20);
+            labelName.TabIndex = 2;
+            labelName.Text = "Название:";
+            // 
             // labelAuthor
-            //
-            this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(33, 37);
-            this.labelAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(51, 17);
-            this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "Автор:";
-            //
+            // 
+            labelAuthor.AutoSize = true;
+            labelAuthor.Location = new System.Drawing.Point(33, 46);
+            labelAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelAuthor.Name = "labelAuthor";
+            labelAuthor.Size = new System.Drawing.Size(54, 20);
+            labelAuthor.TabIndex = 0;
+            labelAuthor.Text = "Автор:";
+            // 
             // buttonCancel
-            //
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(558, 269);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(104, 31);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Отмена";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            //
+            // 
+            buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            buttonCancel.Location = new System.Drawing.Point(558, 336);
+            buttonCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new System.Drawing.Size(104, 39);
+            buttonCancel.TabIndex = 2;
+            buttonCancel.Text = "Отмена";
+            buttonCancel.UseVisualStyleBackColor = true;
+            // 
             // buttonOK
-            //
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Enabled = false;
-            this.buttonOK.Location = new System.Drawing.Point(441, 269);
-            this.buttonOK.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(104, 31);
-            this.buttonOK.TabIndex = 1;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            //
+            // 
+            buttonOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            buttonOK.Enabled = false;
+            buttonOK.Location = new System.Drawing.Point(441, 336);
+            buttonOK.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            buttonOK.Name = "buttonOK";
+            buttonOK.Size = new System.Drawing.Size(104, 39);
+            buttonOK.TabIndex = 1;
+            buttonOK.Text = "OK";
+            buttonOK.UseVisualStyleBackColor = true;
+            // 
             // BookForm
-            //
-            this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(687, 318);
-            this.Controls.Add(this.groupBoxBook);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "BookForm";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Load += new System.EventHandler(this.LoadedHandler);
-            this.groupBoxBook.ResumeLayout(false);
-            this.groupBoxBook.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPages)).EndInit();
-            this.ResumeLayout(false);
+            // 
+            AcceptButton = buttonOK;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = buttonCancel;
+            ClientSize = new System.Drawing.Size(687, 398);
+            Controls.Add(groupBoxBook);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonOK);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "BookForm";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Load += LoadedHandler;
+            groupBoxBook.ResumeLayout(false);
+            groupBoxBook.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPages).EndInit();
+            ResumeLayout(false);
 
         }
 
