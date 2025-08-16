@@ -1,0 +1,35 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/database/">
+    <File Path="database/MyLibrary.sql" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/Library.vsdx" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/common/">
+    <Project Path="src/common/MyLibrary.Common.CL/MyLibrary.Common.CL.csproj" />
+    <Project Path="src/common/MyLibrary.Common.DL/MyLibrary.Common.DL.csproj" />
+    <Project Path="src/common/MyLibrary.Common.DLWithLinqToDataSet/MyLibrary.Common.DLWithLinqToDataSet.csproj" />
+    <Project Path="src/common/MyLibrary.Common.EF/MyLibrary.Common.EF.csproj" />
+    <Project Path="src/common/MyLibrary.Common/MyLibrary.Common.csproj" />
+  </Folder>
+  <Folder Name="/src/winforms/">
+    <Project Path="src/winforms/MyLibrary.WinForms.CL/MyLibrary.WinForms.CL.csproj" />
+    <Project Path="src/winforms/MyLibrary.WinForms.Common/MyLibrary.WinForms.Common.csproj" />
+    <Project Path="src/winforms/MyLibrary.WinForms.DL/MyLibrary.WinForms.DL.csproj" />
+    <Project Path="src/winforms/MyLibrary.WinForms.DLWithLinqToDataSet/MyLibrary.WinForms.DLWithLinqToDataSet.csproj" />
+    <Project Path="src/winforms/MyLibrary.WinForms.EF/MyLibrary.WinForms.EF.csproj" />
+  </Folder>
+  <Folder Name="/src/wpf/">
+    <Project Path="src/wpf/MyLibrary.Wpf.Common/MyLibrary.Wpf.Common.csproj" />
+  </Folder>
+</Solution>
