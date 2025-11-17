@@ -2,7 +2,7 @@
 
 ## What is this?
 
-**MyLibrary application** is a demo project that is written in .NET 9 and illustrates working with:
+**MyLibrary application** is a demo project that is written in .NET 10 and illustrates working with:
 
 #### Database:
 
