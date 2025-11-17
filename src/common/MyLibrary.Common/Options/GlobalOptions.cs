@@ -33,9 +33,9 @@ public static class GlobalOptions
             {
             }
 
-            // Получаем строку подключения из параметра конфигурации DefaultConnection  или null,
-            // если файла appsettings.json или параметра DefaultConnection в нем не существует
-            string connectionString = configuration?.GetConnectionString("DefaultConnection");
+            // Получаем строку подключения из параметра конфигурации DatabaseConnection  или null,
+            // если файла appsettings.json или параметра DatabaseConnection в нем не существует
+            string connectionString = configuration?.GetConnectionString("DatabaseConnection");
 
             return !string.IsNullOrEmpty(connectionString) ? connectionString : defaultConnectionString;
         }
