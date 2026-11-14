@@ -4,6 +4,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/assets/">
+    <File Path="assets/MyLibrary.ico" />
+  </Folder>
   <Folder Name="/database/">
     <File Path="database/MyLibrary.sql" />
   </Folder>

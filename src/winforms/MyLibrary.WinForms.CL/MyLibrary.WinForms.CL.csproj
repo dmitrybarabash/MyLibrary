@@ -6,7 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
 
     <AssemblyTitle>MyLibrary Windows Forms Application (ADO.NET Connected Layer)</AssemblyTitle>
-    <ApplicationIcon>MyLibrary.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

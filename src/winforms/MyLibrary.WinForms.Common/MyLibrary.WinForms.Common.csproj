@@ -5,7 +5,6 @@
     <UseWindowsForms>true</UseWindowsForms>
 
     <AssemblyTitle>MyLibrary Windows Forms Common Library</AssemblyTitle>
-    <ApplicationIcon>MyLibrary.ico</ApplicationIcon>
 
     <NoWarn>
       WFO1000 <!-- Property does not configure the code serialization for its property content -->
