@@ -16,6 +16,8 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 
     <IsPackable>false</IsPackable>
+
+    <UserSecretsId>UserSecrets-For-MyLibrary</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup>
