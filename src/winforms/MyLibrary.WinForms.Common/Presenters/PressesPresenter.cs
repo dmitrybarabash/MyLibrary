@@ -45,10 +45,12 @@ public class PressesPresenter : BasePresenter<IRefView>
 
     private void OnAdd(object sender, EventArgs e)
     {
-        var refItemForm = new RefItemForm();
-        refItemForm.Text = "Новое издательство";
-        refItemForm.GroupBoxText = "Информация о новом издательстве";
-        refItemForm.LabelText = "Издательство:";
+        var refItemForm = new RefItemForm
+        {
+            Text = "Новое издательство",
+            GroupBoxText = "Информация о новом издательстве",
+            LabelText = "Издательство:"
+        };
 
         if (refItemForm.ShowDialog() == DialogResult.OK)
         {
@@ -89,11 +91,13 @@ public class PressesPresenter : BasePresenter<IRefView>
         int selectedIndex = View.ListView.SelectedIndices[0];
         Press press = (Press)View.ListView.Items[selectedIndex].Tag;
 
-        var refItemForm = new RefItemForm();
-        refItemForm.Text = "Изменение существующего издательства";
-        refItemForm.GroupBoxText = "Информация об издательстве";
-        refItemForm.LabelText = "Издательство:";
-        refItemForm.ItemText = press.Name;
+        var refItemForm = new RefItemForm
+        {
+            Text = "Изменение существующего издательства",
+            GroupBoxText = "Информация об издательстве",
+            LabelText = "Издательство:",
+            ItemText = press.Name
+        };
 
         if (refItemForm.ShowDialog() == DialogResult.OK)
         {

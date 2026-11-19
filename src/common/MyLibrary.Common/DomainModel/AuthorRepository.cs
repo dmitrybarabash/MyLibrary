@@ -4,38 +4,38 @@ namespace MyLibrary.Common.DomainModel;
 
 public class AuthorRepository : IRepository<Author>
 {
-    private readonly IDatabase db;
+    private readonly IDatabase _db;
 
     public AuthorRepository(IDatabase database)
     {
-        db = database;
+        _db = database;
     }
 
     #region IRepository<Author> implementation
 
     public IEnumerable<Author> GetAll()
     {
-        return db.GetAllAuthors();
+        return _db.GetAllAuthors();
     }
 
     public Author GetById(long id)
     {
-        return db.GetAuthorById(id);
+        return _db.GetAuthorById(id);
     }
 
     public long Add(Author author)
     {
-        return db.InsertAuthor(author);
+        return _db.InsertAuthor(author);
     }
 
     public void Update(Author author)
     {
-        db.UpdateAuthor(author);
+        _db.UpdateAuthor(author);
     }
 
     public void Delete(long id)
     {
-        db.DeleteAuthor(id);
+        _db.DeleteAuthor(id);
     }
 
     #endregion

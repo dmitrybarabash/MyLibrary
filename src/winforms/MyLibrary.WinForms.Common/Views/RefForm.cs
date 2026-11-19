@@ -1,68 +1,67 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MyLibrary.WinForms.Common.Views
+namespace MyLibrary.WinForms.Common.Views;
+
+public partial class RefForm : Form, IRefView
 {
-    public partial class RefForm : Form, IRefView
+    public RefForm()
     {
-        public RefForm()
-        {
-            InitializeComponent();
-            Modified = false;
-        }
+        InitializeComponent();
+        Modified = false;
+    }
 
-        #region IRefView implementation
+    #region IRefView implementation
 
-        public string Title { set { Text = value; } }
+    public string Title { set => Text = value; }
 
-        public ListView ListView { get { return listView; } }
+    public ListView ListView { get => listView; }
 
-        public string ListViewTheOnlyColumnName { set { listView.Columns[0].Text = value; } }
+    public string ListViewTheOnlyColumnName { set => listView.Columns[0].Text = value; }
 
-        public bool Modified { get; set; }
+    public bool Modified { get; set; }
 
-        public event EventHandler Loaded;
+    public event EventHandler Loaded;
 
-        private void LoadedHandler(object sender, EventArgs e)
-        {
-            if (Loaded is not null)
-                Loaded(this, EventArgs.Empty);
-        }
+    private void LoadedHandler(object sender, EventArgs e)
+    {
+        if (Loaded is not null)
+            Loaded(this, EventArgs.Empty);
+    }
 
-        public event EventHandler Add;
+    public event EventHandler Add;
 
-        private void AddHandler(object sender, EventArgs e)
-        {
-            if (Add is not null)
-                Add(this, EventArgs.Empty);
-        }
+    private void AddHandler(object sender, EventArgs e)
+    {
+        if (Add is not null)
+            Add(this, EventArgs.Empty);
+    }
 
-        public event EventHandler Edit;
+    public event EventHandler Edit;
 
-        private void EditHandler(object sender, EventArgs e)
-        {
-            if (Edit is not null)
-                Edit(this, EventArgs.Empty);
-        }
+    private void EditHandler(object sender, EventArgs e)
+    {
+        if (Edit is not null)
+            Edit(this, EventArgs.Empty);
+    }
 
-        public event EventHandler Delete;
+    public event EventHandler Delete;
 
-        private void DeleteHandler(object sender, EventArgs e)
-        {
-            if (Delete is not null)
-                Delete(this, EventArgs.Empty);
-        }
+    private void DeleteHandler(object sender, EventArgs e)
+    {
+        if (Delete is not null)
+            Delete(this, EventArgs.Empty);
+    }
 
-        #endregion
+    #endregion
 
-        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            EditHandler(sender, e);
-        }
+    private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+        EditHandler(sender, e);
+    }
 
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-        }
+    private void buttonClose_Click(object sender, EventArgs e)
+    {
+        DialogResult = DialogResult.OK;
     }
 }

@@ -51,10 +51,12 @@ public class MainPresenter : BasePresenter<IMainView>
             return;
         }
 
-        var bookPresenter = new BookPresenter(Model, new BookForm());
-        bookPresenter.Title = "Новая книга";
-        bookPresenter.AuthorFk = 0;
-        bookPresenter.PressFk = 0;
+        var bookPresenter = new BookPresenter(Model, new BookForm())
+        {
+            Title = "Новая книга",
+            AuthorFk = 0,
+            PressFk = 0
+        };
         if (((Form)bookPresenter.View).ShowDialog() == DialogResult.OK)
         {
             try
@@ -107,13 +109,15 @@ public class MainPresenter : BasePresenter<IMainView>
         int selectedIndex = selectedIndices[0];
         Book book = (Book)View.ListView.Items[selectedIndex].Tag;
 
-        var bookPresenter = new BookPresenter(Model, new BookForm());
-        bookPresenter.Title = "Изменение существующей книги";
-        bookPresenter.AuthorFk = book.AuthorFk;
+        var bookPresenter = new BookPresenter(Model, new BookForm())
+        {
+            Title = "Изменение существующей книги",
+            AuthorFk = book.AuthorFk,
+            PressFk = book.PressFk
+        };
         bookPresenter.View.BookName = book.Name;
         bookPresenter.View.Pages = book.Pages;
         bookPresenter.View.Price = book.Price;
-        bookPresenter.PressFk = book.PressFk;
         if (((Form)bookPresenter.View).ShowDialog() == DialogResult.OK)
         {
             try

@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MyLibrary.WinForms.Common.Views
+namespace MyLibrary.WinForms.Common.Views;
+
+public partial class RefItemForm : Form
 {
-    public partial class RefItemForm : Form
+    public RefItemForm()
     {
-        public RefItemForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public string GroupBoxText { set { groupBoxItem.Text = value; } }
+    public string GroupBoxText { set => groupBoxItem.Text = value; }
 
-        public string LabelText { set { labelItem.Text = value; } }
+    public string LabelText { set => labelItem.Text = value; }
 
-        public string ItemText
-        {
-            get { return textBoxItem.Text.Trim(); }
-            set { textBoxItem.Text = value; }
-        }
+    public string ItemText
+    {
+        get => textBoxItem.Text.Trim();
+        set => textBoxItem.Text = value;
+    }
 
-        private void textBoxItem_TextChanged(object sender, EventArgs e)
-        {
-            buttonOk.Enabled = ItemText.Length > 0;
-        }
+    private void textBoxItem_TextChanged(object sender, EventArgs e)
+    {
+        buttonOk.Enabled = ItemText.Length > 0;
     }
 }
