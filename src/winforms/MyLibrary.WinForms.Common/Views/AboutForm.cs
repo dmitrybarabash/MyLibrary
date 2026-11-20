@@ -8,6 +8,7 @@ public partial class AboutForm : Form
     public AboutForm()
     {
         InitializeComponent();
+        labelProductName.Text = $"MyLibrary {typeof(AboutForm).Assembly.GetName().Version.ToString(2)}";
     }
 
     private void linkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

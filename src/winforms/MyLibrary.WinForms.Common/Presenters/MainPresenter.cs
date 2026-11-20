@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Forms;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Utilities;
 using MyLibrary.WinForms.Common.Mvp;
@@ -13,12 +12,16 @@ namespace MyLibrary.WinForms.Common.Presenters;
 public class MainPresenter : BasePresenter<IMainView>
 {
     private IMyLibraryDomainModel Model { get; set; }
+    private IViewFactory ViewFactory { get; set; }
+    // Книги в том же порядке, в каком они показаны в представлении
+    private List<Book> Books { get; set; } = [];
 
-    public MainPresenter(IMyLibraryDomainModel domainModel, IMainView mainView)
+    public MainPresenter(IMyLibraryDomainModel domainModel, IMainView mainView, IViewFactory viewFactory)
     {
-        // Сохраняем внедряемые ссылки на модель и представление
+        // Сохраняем внедряемые ссылки на модель, представление и фабрику представлений
         Model = domainModel;
         View = mainView;
+        ViewFactory = viewFactory;
         // Подписываемся на события представления
         View.Loaded += OnLoaded;
         View.AddBook += OnAddBook;
@@ -39,25 +42,23 @@ public class MainPresenter : BasePresenter<IMainView>
         // Таблица Authors не должна быть пустой, поскольку внешний ключ AuthorFk таблицы Books не может быть NULL
         if (Model.AuthorRepository.GetAll().ToList().Count == 0)
         {
-            MessageBox.Show("Справочник \"Авторы\" пуст. Необходимо, чтобы он содержал хотя бы одного автора.",
-                "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Справочник \"Авторы\" пуст. Необходимо, чтобы он содержал хотя бы одного автора.");
             return;
         }
         // Таблица Presses не должна быть пустой, поскольку внешний ключ PressFk таблицы Books не может быть NULL
         if (Model.PressRepository.GetAll().ToList().Count == 0)
         {
-            MessageBox.Show("Справочник \"Издательства\" пуст. Необходимо, чтобы он содержал хотя бы одно издательство.",
-                "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Справочник \"Издательства\" пуст. Необходимо, чтобы он содержал хотя бы одно издательство.");
             return;
         }
 
-        var bookPresenter = new BookPresenter(Model, new BookForm())
+        var bookPresenter = new BookPresenter(Model, ViewFactory.CreateBookView())
         {
             Title = "Новая книга",
             AuthorFk = 0,
             PressFk = 0
         };
-        if (((Form)bookPresenter.View).ShowDialog() == DialogResult.OK)
+        if (bookPresenter.View.ShowDialog())
         {
             try
             {
@@ -73,8 +74,7 @@ public class MainPresenter : BasePresenter<IMainView>
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при добавлении новой книги.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при добавлении новой книги.");
                 Utils.Log.Trace(ex);
             }
 
@@ -82,34 +82,30 @@ public class MainPresenter : BasePresenter<IMainView>
             UpdateView();
 
             // Выделяем добавленную (последнюю в списке) книгу
-            View.ListView.Select();
-            View.ListView.Items[View.ListView.Items.Count - 1].Selected = true;
-            View.ListView.EnsureVisible(View.ListView.Items.Count - 1);
+            if (Books.Count > 0)
+                View.SelectBooks([Books.Count - 1]);
         }
         else
         {
             // Восстанавливаем фокус и выделение книг
-            View.ListView.Select();
+            View.FocusBookList();
         }
     }
 
     private void OnEditBook(object sender, EventArgs e)
     {
+        // Индексы выделенных элементов в списке книг. Это копия, поэтому она
+        // остается актуальной и после того, как UpdateView заново заполнит список.
+        IReadOnlyList<int> selectedIndices = View.SelectedBookIndices;
+
         // Проверяем, есть ли хотя бы один выделенный элемент в списке книг
-        if (View.ListView.SelectedItems.Count == 0)
+        if (selectedIndices.Count == 0)
             return;
 
-        // Коллекция выделенных элементов в списке книг представления.
-        // Делаем копию, потому что View.ListView.SelectedIndices возвращает ссылку
-        // на актуальную коллекцию, а она будет очищена при вызове UpdateView.
-        var selectedIndices = new int[View.ListView.SelectedIndices.Count];
-        View.ListView.SelectedIndices.CopyTo(selectedIndices, 0);
-
         // Если выделенных элементов несколько, то берем первый из них
-        int selectedIndex = selectedIndices[0];
-        Book book = (Book)View.ListView.Items[selectedIndex].Tag;
+        Book book = Books[selectedIndices[0]];
 
-        var bookPresenter = new BookPresenter(Model, new BookForm())
+        var bookPresenter = new BookPresenter(Model, ViewFactory.CreateBookView())
         {
             Title = "Изменение существующей книги",
             AuthorFk = book.AuthorFk,
@@ -118,7 +114,7 @@ public class MainPresenter : BasePresenter<IMainView>
         bookPresenter.View.BookName = book.Name;
         bookPresenter.View.Pages = book.Pages;
         bookPresenter.View.Price = book.Price;
-        if (((Form)bookPresenter.View).ShowDialog() == DialogResult.OK)
+        if (bookPresenter.View.ShowDialog())
         {
             try
             {
@@ -131,8 +127,7 @@ public class MainPresenter : BasePresenter<IMainView>
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при изменении информации о книге.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при изменении информации о книге.");
                 Utils.Log.Trace(ex);
             }
 
@@ -141,25 +136,19 @@ public class MainPresenter : BasePresenter<IMainView>
         }
 
         // Восстанавливаем выделение
-        View.ListView.Select();
-        foreach (int index in selectedIndices)
-        {
-            View.ListView.Items[index].Selected = true;
-            View.ListView.EnsureVisible(index);
-        }
+        View.SelectBooks(selectedIndices);
     }
 
     private void OnDeleteBook(object sender, EventArgs e)
     {
         // Восстанавливаем фокус
-        View.ListView.Focus();
+        View.FocusBookList();
 
-        // Коллекция выделенных элементов в списке книг представления
-        ListView.SelectedIndexCollection selectedIndices = View.ListView.SelectedIndices;
+        // Индексы выделенных элементов в списке книг
+        IReadOnlyList<int> selectedIndices = View.SelectedBookIndices;
 
-        if (selectedIndices.Count == 0 || MessageBox.Show("Вы действительно хотите удалить эту книгу?",
-            "Удаление информации о книге", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-            MessageBoxDefaultButton.Button2) == DialogResult.No)
+        if (selectedIndices.Count == 0 ||
+            !View.Confirm("Вы действительно хотите удалить эту книгу?", "Удаление информации о книге"))
             return;
 
         try
@@ -169,61 +158,61 @@ public class MainPresenter : BasePresenter<IMainView>
             // все следующие элементы поднимутся вверх и список выделенных элементов станет не актуален.
             for (int i = selectedIndices.Count - 1; i >= 0; i--)
             {
-                Model.BookRepository.Delete(((Book)View.ListView.Items[selectedIndices[i]].Tag).Id);
-                View.ListView.Items.RemoveAt(selectedIndices[i]);
+                int index = selectedIndices[i];
+                Model.BookRepository.Delete(Books[index].Id);
+                Books.RemoveAt(index);
+                View.RemoveBookAt(index);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при удалении книг.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при удалении книг.");
             Utils.Log.Trace(ex);
         }
     }
 
-    // Очищаем список книг в представлении и заполняем его заново из модели
+    // Заново считываем список книг из модели и показываем его в представлении
     private void UpdateView()
     {
         try
         {
             List<Author> authors = Model.AuthorRepository.GetAll().ToList();
             List<Press> presses = Model.PressRepository.GetAll().ToList();
-            IEnumerable<Book> books = Model.BookRepository.GetAll();
+            List<Book> books = Model.BookRepository.GetAll().ToList();
 
-            View.ListView.Items.Clear();
-            foreach (var book in books)
-            {
-                ListViewItem item = View.ListView.Items.Add(new ListViewItem());
-                item.Text = authors.Find(a => a.Id == book.AuthorFk).Name;
-                item.SubItems.Add(book.Name);
-                item.SubItems.Add(book.Pages.ToString());
-                item.SubItems.Add(decimal.Round(book.Price, 2).ToString("G", CultureInfo.InvariantCulture));
-                item.SubItems.Add(presses.Find(p => p.Id == book.PressFk).Name);
-                item.Tag = book;
-            }
+            // Готовим строки полностью до того, как что-либо менять, чтобы при ошибке
+            // список книг в презентере и в представлении остался согласованным
+            List<BookListItem> items = books.Select(book => new BookListItem(
+                authors.Find(a => a.Id == book.AuthorFk).Name,
+                book.Name,
+                book.Pages.ToString(),
+                decimal.Round(book.Price, 2).ToString("G", CultureInfo.InvariantCulture),
+                presses.Find(p => p.Id == book.PressFk).Name)).ToList();
+
+            Books = books;
+            View.ShowBooks(items);
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при получении списка книг.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при получении списка книг.");
             Utils.Log.Trace(ex);
         }
     }
 
     private void OnEditAuthors(object sender, EventArgs e)
     {
-        var authorsPresenter = new AuthorsPresenter(Model, new RefForm());
+        var authorsPresenter = new AuthorsPresenter(Model, ViewFactory.CreateRefView(), ViewFactory);
         authorsPresenter.Modified += OnModified;
-        ((Form)authorsPresenter.View).ShowDialog();
+        authorsPresenter.View.ShowDialog();
         // Эта отписка здесь, видимо, лишняя. Но пусть пока будет.
         authorsPresenter.Modified -= OnModified;
     }
 
     private void OnEditPresses(object sender, EventArgs e)
     {
-        var pressesPresenter = new PressesPresenter(Model, new RefForm());
+        var pressesPresenter = new PressesPresenter(Model, ViewFactory.CreateRefView(), ViewFactory);
         pressesPresenter.Modified += OnModified;
-        ((Form)pressesPresenter.View).ShowDialog();
+        pressesPresenter.View.ShowDialog();
         // Эта отписка здесь, видимо, лишняя. Но пусть пока будет.
         pressesPresenter.Modified -= OnModified;
     }

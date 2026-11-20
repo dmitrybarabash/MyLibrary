@@ -7,16 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\MyLibrary.ico" />
-    <None Remove="Resources\MyLibrary.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\MyLibrary.ico" />
-    <Resource Remove="Resources\MyLibrary.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />

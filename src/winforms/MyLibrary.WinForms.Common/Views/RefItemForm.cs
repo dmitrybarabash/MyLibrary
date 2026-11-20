@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
+using MyLibrary.WinForms.Common.Mvp;
 
 namespace MyLibrary.WinForms.Common.Views;
 
-public partial class RefItemForm : Form
+public partial class RefItemForm : Form, IRefItemView
 {
     public RefItemForm()
     {
         InitializeComponent();
     }
 
-    public string GroupBoxText { set => groupBoxItem.Text = value; }
+    #region IRefItemView implementation
 
-    public string LabelText { set => labelItem.Text = value; }
+    public string Title { set => Text = value; }
+
+    public string Heading { set => groupBoxItem.Text = value; }
+
+    public string ItemLabel { set => labelItem.Text = value; }
 
     public string ItemText
     {
@@ -20,8 +25,20 @@ public partial class RefItemForm : Form
         set => textBoxItem.Text = value;
     }
 
+    public bool CanAccept { set => buttonOk.Enabled = value; }
+
+    bool IDialogView.ShowDialog()
+    {
+        return ShowDialog() == DialogResult.OK;
+    }
+
+    public event EventHandler ItemTextChanged;
+
     private void textBoxItem_TextChanged(object sender, EventArgs e)
     {
-        buttonOk.Enabled = ItemText.Length > 0;
+        if (ItemTextChanged is not null)
+            ItemTextChanged(this, EventArgs.Empty);
     }
+
+    #endregion
 }

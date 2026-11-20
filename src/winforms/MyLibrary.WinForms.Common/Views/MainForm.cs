@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MyLibrary.WinForms.Common.Views;
@@ -25,7 +27,44 @@ public partial class MainForm : Form, IMainView
 
     #region IMainView implementation
 
-    public ListView ListView => listView;
+    public IReadOnlyList<int> SelectedBookIndices => [.. listView.SelectedIndices.Cast<int>()];
+
+    public void ShowBooks(IEnumerable<BookListItem> books)
+    {
+        listView.Items.Clear();
+        foreach (var book in books)
+            listView.Items.Add(new ListViewItem([book.Author, book.Name, book.Pages, book.Price, book.Press]));
+    }
+
+    public void RemoveBookAt(int index)
+    {
+        listView.Items.RemoveAt(index);
+    }
+
+    public void SelectBooks(IEnumerable<int> indices)
+    {
+        listView.Select();
+        foreach (int index in indices)
+        {
+            listView.Items[index].Selected = true;
+            listView.EnsureVisible(index);
+        }
+    }
+
+    public void FocusBookList()
+    {
+        listView.Select();
+    }
+
+    public void ShowError(string message)
+    {
+        MessageBoxHelper.ShowError(message);
+    }
+
+    public bool Confirm(string message, string caption)
+    {
+        return MessageBoxHelper.Confirm(message, caption);
+    }
 
     public event EventHandler Loaded;
 

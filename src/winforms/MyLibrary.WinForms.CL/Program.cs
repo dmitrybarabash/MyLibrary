@@ -17,7 +17,7 @@ static class Program
         ApplicationConfiguration.Initialize();
 
         using var myLibraryDomainModel = new MyLibraryDomainModel();
-        var mainPresenter = new MainPresenter(myLibraryDomainModel, new MainForm());
+        var mainPresenter = new MainPresenter(myLibraryDomainModel, new MainForm(), new WinFormsViewFactory());
         Application.Run((Form)mainPresenter.View);
     }
 }

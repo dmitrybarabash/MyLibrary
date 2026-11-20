@@ -4,10 +4,13 @@ using System.Windows.Navigation;
 
 namespace MyLibrary.Wpf.Common.Views;
 
-public partial class AboutWindow : System.Windows.Window
+public partial class AboutWindow : Window
 {
-    public AboutWindow() =>
+    public AboutWindow()
+    {
         InitializeComponent();
+        textBlockProductName.Text = $"MyLibrary {typeof(AboutWindow).Assembly.GetName().Version.ToString(2)}";
+    }
 
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
     {

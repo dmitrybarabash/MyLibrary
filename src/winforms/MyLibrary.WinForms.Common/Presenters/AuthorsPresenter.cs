@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Linq;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Utilities;
 using MyLibrary.WinForms.Common.Mvp;
@@ -11,15 +11,19 @@ namespace MyLibrary.WinForms.Common.Presenters;
 public class AuthorsPresenter : BasePresenter<IRefView>
 {
     private IMyLibraryDomainModel Model { get; set; }
+    private IViewFactory ViewFactory { get; set; }
+    // Авторы в том же порядке, в каком они показаны в представлении
+    private List<Author> Authors { get; set; } = [];
 
-    public AuthorsPresenter(IMyLibraryDomainModel domainModel, IRefView refView)
+    public AuthorsPresenter(IMyLibraryDomainModel domainModel, IRefView refView, IViewFactory viewFactory)
     {
-        // Сохраняем внедряемые ссылки на модель и представление
+        // Сохраняем внедряемые ссылки на модель, представление и фабрику представлений
         Model = domainModel;
         View = refView;
+        ViewFactory = viewFactory;
         // Настраиваем представление
         View.Title = "Авторы";
-        View.ListViewTheOnlyColumnName = "Автор";
+        View.ColumnName = "Автор";
         // Подписываемся на события представления
         View.Loaded += OnLoaded;
         View.Add += OnAdd;
@@ -44,24 +48,21 @@ public class AuthorsPresenter : BasePresenter<IRefView>
 
     private void OnAdd(object sender, EventArgs e)
     {
-        var refItemForm = new RefItemForm
-        {
-            Text = "Новый автор",
-            GroupBoxText = "Информация о новом авторе",
-            LabelText = "Автор:"
-        };
+        var refItemPresenter = new RefItemPresenter(ViewFactory.CreateRefItemView());
+        refItemPresenter.View.Title = "Новый автор";
+        refItemPresenter.View.Heading = "Информация о новом авторе";
+        refItemPresenter.View.ItemLabel = "Автор:";
 
-        if (refItemForm.ShowDialog() == DialogResult.OK)
+        if (refItemPresenter.View.ShowDialog())
         {
             try
             {
-                var newAuthor = new Author { Id = 0, Name = refItemForm.ItemText };
+                var newAuthor = new Author { Id = 0, Name = refItemPresenter.View.ItemText };
                 Model.AuthorRepository.Add(newAuthor);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при добавлении нового автора.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при добавлении нового автора.");
                 Utils.Log.Trace(ex);
             }
 
@@ -69,50 +70,48 @@ public class AuthorsPresenter : BasePresenter<IRefView>
             UpdateView();
 
             // Выделяем добавленного (последнего в списке) автора
-            View.ListView.Select();
-            View.ListView.Items[View.ListView.Items.Count - 1].Selected = true;
-            View.ListView.EnsureVisible(View.ListView.Items.Count - 1);
+            if (Authors.Count > 0)
+                View.SelectItems([Authors.Count - 1]);
         }
         else
         {
             // Восстанавливаем фокус и выделение авторов
-            View.ListView.Select();
+            View.FocusItemList();
         }
     }
 
     private void OnEdit(object sender, EventArgs e)
     {
-        // Проверяем, есть ли хотя бы один выделенный элемент в списке книг
-        if (View.ListView.SelectedItems.Count == 0)
+        IReadOnlyList<int> selectedIndices = View.SelectedItemIndices;
+
+        // Проверяем, есть ли хотя бы один выделенный элемент в списке авторов
+        if (selectedIndices.Count == 0)
             return;
 
         // Если выделенных элементов несколько, то берем первый из них
-        int selectedIndex = View.ListView.SelectedIndices[0];
-        Author author = (Author)View.ListView.Items[selectedIndex].Tag;
+        int selectedIndex = selectedIndices[0];
+        Author author = Authors[selectedIndex];
 
-        var refItemForm = new RefItemForm
-        {
-            Text = "Изменение существующего автора",
-            GroupBoxText = "Информация об авторе",
-            LabelText = "Автор:",
-            ItemText = author.Name
-        };
+        var refItemPresenter = new RefItemPresenter(ViewFactory.CreateRefItemView());
+        refItemPresenter.View.Title = "Изменение существующего автора";
+        refItemPresenter.View.Heading = "Информация об авторе";
+        refItemPresenter.View.ItemLabel = "Автор:";
+        refItemPresenter.View.ItemText = author.Name;
 
-        if (refItemForm.ShowDialog() == DialogResult.OK)
+        if (refItemPresenter.View.ShowDialog())
         {
             try
             {
-                author.Name = refItemForm.ItemText;
+                author.Name = refItemPresenter.View.ItemText;
                 Model.AuthorRepository.Update(author);
-                View.ListView.Items[selectedIndex].Text = author.Name;
+                View.UpdateItemAt(selectedIndex, author.Name);
 
                 // Оповещаем подписчиков о том, что произошли изменения
                 ModifiedHandler();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при изменении информации об авторе.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при изменении информации об авторе.");
                 Utils.Log.Trace(ex);
             }
         }
@@ -121,12 +120,12 @@ public class AuthorsPresenter : BasePresenter<IRefView>
     private void OnDelete(object sender, EventArgs e)
     {
         // Восстанавливаем фокус
-        View.ListView.Focus();
+        View.FocusItemList();
 
-        ListView.SelectedIndexCollection selectedIndices = View.ListView.SelectedIndices;
+        IReadOnlyList<int> selectedIndices = View.SelectedItemIndices;
 
-        if (selectedIndices.Count == 0 || MessageBox.Show("Будут удалены не только эти авторы, но и все их книги.\n\nВы уверены, что хотите это всё удалить?",
-            "Удаление авторов и всех их книг", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+        if (selectedIndices.Count == 0 || !View.Confirm("Будут удалены не только эти авторы, но и все их книги.\n\nВы уверены, что хотите это всё удалить?",
+            "Удаление авторов и всех их книг"))
             return;
 
         try
@@ -136,8 +135,10 @@ public class AuthorsPresenter : BasePresenter<IRefView>
             // все следующие элементы поднимутся вверх и список выделенных элементов станет не актуален.
             for (int i = selectedIndices.Count - 1; i >= 0; i--)
             {
-                Model.AuthorRepository.Delete(((Author)View.ListView.Items[selectedIndices[i]].Tag).Id);
-                View.ListView.Items.RemoveAt(selectedIndices[i]);
+                int index = selectedIndices[i];
+                Model.AuthorRepository.Delete(Authors[index].Id);
+                Authors.RemoveAt(index);
+                View.RemoveItemAt(index);
             }
 
             // Оповещаем подписчиков о том, что произошли изменения
@@ -145,31 +146,22 @@ public class AuthorsPresenter : BasePresenter<IRefView>
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при удалении авторов.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при удалении авторов.");
             Utils.Log.Trace(ex);
         }
     }
 
-    // Очищаем список и заполняем его заново из модели
+    // Заново считываем список из модели и показываем его в представлении
     private void UpdateView()
     {
         try
         {
-            IEnumerable<Author> authors = Model.AuthorRepository.GetAll();
-
-            View.ListView.Items.Clear();
-            foreach (var author in authors)
-            {
-                ListViewItem item = View.ListView.Items.Add(new ListViewItem());
-                item.Text = author.Name;
-                item.Tag = author;
-            }
+            Authors = Model.AuthorRepository.GetAll().ToList();
+            View.ShowItems(Authors.Select(a => a.Name));
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при получении списка авторов.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при получении списка авторов.");
             Utils.Log.Trace(ex);
         }
     }

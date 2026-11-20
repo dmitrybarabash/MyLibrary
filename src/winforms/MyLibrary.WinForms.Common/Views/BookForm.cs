@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using MyLibrary.WinForms.Common.Mvp;
 
 namespace MyLibrary.WinForms.Common.Views;
 
@@ -12,7 +14,7 @@ public partial class BookForm : Form, IBookView
 
     #region IBookView implementation
 
-    public ComboBox AuthorComboBox => comboBoxAuthor;
+    public string Title { set => Text = value; }
 
     public string BookName
     {
@@ -32,7 +34,39 @@ public partial class BookForm : Form, IBookView
         set => numericUpDownPrice.Value = value;
     }
 
-    public ComboBox PressComboBox => comboBoxPress;
+    public int SelectedAuthorIndex
+    {
+        get => comboBoxAuthor.SelectedIndex;
+        set => comboBoxAuthor.SelectedIndex = value;
+    }
+
+    public int SelectedPressIndex
+    {
+        get => comboBoxPress.SelectedIndex;
+        set => comboBoxPress.SelectedIndex = value;
+    }
+
+    public bool CanAccept { set => buttonOK.Enabled = value; }
+
+    public void SetAuthors(IEnumerable<string> authors)
+    {
+        SetComboBoxItems(comboBoxAuthor, authors);
+    }
+
+    public void SetPresses(IEnumerable<string> presses)
+    {
+        SetComboBoxItems(comboBoxPress, presses);
+    }
+
+    bool IDialogView.ShowDialog()
+    {
+        return ShowDialog() == DialogResult.OK;
+    }
+
+    public void ShowError(string message)
+    {
+        MessageBoxHelper.ShowError(message);
+    }
 
     public event EventHandler Loaded;
 
@@ -40,6 +74,14 @@ public partial class BookForm : Form, IBookView
     {
         if (Loaded is not null)
             Loaded(this, EventArgs.Empty);
+    }
+
+    public event EventHandler BookNameChanged;
+
+    private void textBoxName_TextChanged(object sender, EventArgs e)
+    {
+        if (BookNameChanged is not null)
+            BookNameChanged(this, EventArgs.Empty);
     }
 
     public event EventHandler AuthorSelected;
@@ -60,8 +102,10 @@ public partial class BookForm : Form, IBookView
 
     #endregion
 
-    private void textBoxName_TextChanged(object sender, EventArgs e)
+    private static void SetComboBoxItems(ComboBox comboBox, IEnumerable<string> items)
     {
-        buttonOK.Enabled = BookName.Length > 0;
+        comboBox.Items.Clear();
+        foreach (string item in items)
+            comboBox.Items.Add(item);
     }
 }

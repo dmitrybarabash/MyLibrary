@@ -112,7 +112,7 @@
             labelProductName.Name = "labelProductName";
             labelProductName.Size = new System.Drawing.Size(242, 46);
             labelProductName.TabIndex = 0;
-            labelProductName.Text = "MyLibrary 1.0";
+            labelProductName.Text = "MyLibrary 0.0";
             // 
             // AboutForm
             // 

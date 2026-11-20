@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using MyLibrary.WinForms.Common.Mvp;
 
 namespace MyLibrary.WinForms.Common.Views;
 
@@ -8,18 +11,62 @@ public partial class RefForm : Form, IRefView
     public RefForm()
     {
         InitializeComponent();
-        Modified = false;
     }
 
     #region IRefView implementation
 
     public string Title { set => Text = value; }
 
-    public ListView ListView { get => listView; }
+    public string ColumnName { set => columnName.Text = value; }
 
-    public string ListViewTheOnlyColumnName { set => listView.Columns[0].Text = value; }
+    public IReadOnlyList<int> SelectedItemIndices => [.. listView.SelectedIndices.Cast<int>()];
 
-    public bool Modified { get; set; }
+    public void ShowItems(IEnumerable<string> items)
+    {
+        listView.Items.Clear();
+        foreach (string item in items)
+            listView.Items.Add(item);
+    }
+
+    public void UpdateItemAt(int index, string text)
+    {
+        listView.Items[index].Text = text;
+    }
+
+    public void RemoveItemAt(int index)
+    {
+        listView.Items.RemoveAt(index);
+    }
+
+    public void SelectItems(IEnumerable<int> indices)
+    {
+        listView.Select();
+        foreach (int index in indices)
+        {
+            listView.Items[index].Selected = true;
+            listView.EnsureVisible(index);
+        }
+    }
+
+    public void FocusItemList()
+    {
+        listView.Select();
+    }
+
+    bool IDialogView.ShowDialog()
+    {
+        return ShowDialog() == DialogResult.OK;
+    }
+
+    public void ShowError(string message)
+    {
+        MessageBoxHelper.ShowError(message);
+    }
+
+    public bool Confirm(string message, string caption)
+    {
+        return MessageBoxHelper.Confirm(message, caption);
+    }
 
     public event EventHandler Loaded;
 
