@@ -35,6 +35,10 @@
     <Project Path="src/winforms/MyLibrary.WinForms.EF/MyLibrary.WinForms.EF.csproj" />
   </Folder>
   <Folder Name="/src/wpf/">
+    <Project Path="src/wpf/MyLibrary.Wpf.CL/MyLibrary.Wpf.CL.csproj" />
     <Project Path="src/wpf/MyLibrary.Wpf.Common/MyLibrary.Wpf.Common.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.DL/MyLibrary.Wpf.DL.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.DLWithLinqToDataSet/MyLibrary.Wpf.DLWithLinqToDataSet.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.EF/MyLibrary.Wpf.EF.csproj" />
   </Folder>
 </Solution>

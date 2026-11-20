@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Общие картинки лежат в MyLibrary.Common, но WPF-ресурсами их может сделать только WPF-проект,
+         поэтому подключаем их сюда ссылками. Доступны как /MyLibrary.Wpf.Common;component/Resources/... -->
+    <Resource Include="..\..\common\MyLibrary.Common\Resources\MyLibrary.ico" Link="Resources\MyLibrary.ico" />
+    <Resource Include="..\..\common\MyLibrary.Common\Resources\MyLibrary.png" Link="Resources\MyLibrary.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\common\MyLibrary.Common\MyLibrary.Common.csproj" />
   </ItemGroup>
 
