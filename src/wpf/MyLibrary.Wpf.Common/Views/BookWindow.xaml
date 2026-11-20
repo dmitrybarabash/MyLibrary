@@ -1,0 +1,77 @@
+﻿<Window x:Class="MyLibrary.Wpf.Common.Views.BookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:behaviors="clr-namespace:MyLibrary.Wpf.Common.Behaviors"
+        xmlns:controls="clr-namespace:MyLibrary.Wpf.Common.Controls"
+        xmlns:viewModels="clr-namespace:MyLibrary.Wpf.Common.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:BookViewModel}"
+        Title="{Binding Title}"
+        Width="690"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        FocusManager.FocusedElement="{Binding ElementName=comboBoxAuthor}"
+        behaviors:LoadedBehavior.Command="{Binding LoadedCommand}">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Window.Resources>
+    <StackPanel Margin="12">
+        <GroupBox Header="Информация о книге" Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Автор:" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox x:Name="comboBoxAuthor" Grid.Row="0" Grid.Column="1"
+                          ItemsSource="{Binding Authors}"
+                          SelectedItem="{Binding SelectedAuthor}"
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource FieldStyle}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Название:" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding BookName, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         Style="{StaticResource FieldStyle}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Страницы:" Style="{StaticResource FieldLabelStyle}"/>
+                <controls:NumericUpDown Grid.Row="2" Grid.Column="1"
+                                        Width="100" HorizontalAlignment="Left"
+                                        Minimum="10" Maximum="2000"
+                                        Value="{Binding Pages}"
+                                        Style="{StaticResource FieldStyle}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Цена:" Style="{StaticResource FieldLabelStyle}"/>
+                <controls:NumericUpDown Grid.Row="3" Grid.Column="1"
+                                        Width="100" HorizontalAlignment="Left"
+                                        Minimum="0" Maximum="10000" DecimalPlaces="2"
+                                        Value="{Binding Price}"
+                                        Style="{StaticResource FieldStyle}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Издательство:" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                          ItemsSource="{Binding Presses}"
+                          SelectedItem="{Binding SelectedPress}"
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource FieldStyle}"/>
+            </Grid>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="OK" IsDefault="True" Command="{Binding OkCommand}" Style="{StaticResource DialogButtonStyle}"/>
+            <Button Content="Отмена" IsCancel="True" Style="{StaticResource DialogButtonStyle}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

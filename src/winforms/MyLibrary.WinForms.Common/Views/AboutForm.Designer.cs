@@ -102,7 +102,7 @@
             labelCopyright.Name = "labelCopyright";
             labelCopyright.Size = new System.Drawing.Size(289, 17);
             labelCopyright.TabIndex = 1;
-            labelCopyright.Text = "Copyright (c) 2015-2025, Дмитрий Барабаш";
+            labelCopyright.Text = "Copyright (c) 2015-2026, Дмитрий Барабаш";
             // 
             // labelProductName
             // 
@@ -112,7 +112,7 @@
             labelProductName.Name = "labelProductName";
             labelProductName.Size = new System.Drawing.Size(242, 46);
             labelProductName.TabIndex = 0;
-            labelProductName.Text = "MyLibrary 1.0";
+            labelProductName.Text = "MyLibrary 0.0";
             // 
             // AboutForm
             // 

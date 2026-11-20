@@ -4,6 +4,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/assets/">
+    <File Path="assets/MyLibrary.ico" />
+  </Folder>
   <Folder Name="/database/">
     <File Path="database/MyLibrary.sql" />
   </Folder>
@@ -12,6 +15,8 @@
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/" />
@@ -30,6 +35,10 @@
     <Project Path="src/winforms/MyLibrary.WinForms.EF/MyLibrary.WinForms.EF.csproj" />
   </Folder>
   <Folder Name="/src/wpf/">
+    <Project Path="src/wpf/MyLibrary.Wpf.CL/MyLibrary.Wpf.CL.csproj" />
     <Project Path="src/wpf/MyLibrary.Wpf.Common/MyLibrary.Wpf.Common.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.DL/MyLibrary.Wpf.DL.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.DLWithLinqToDataSet/MyLibrary.Wpf.DLWithLinqToDataSet.csproj" />
+    <Project Path="src/wpf/MyLibrary.Wpf.EF/MyLibrary.Wpf.EF.csproj" />
   </Folder>
 </Solution>

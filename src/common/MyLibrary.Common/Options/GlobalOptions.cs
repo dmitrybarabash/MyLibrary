@@ -18,24 +18,19 @@ public static class GlobalOptions
             // Дефолтная строка соединения
             string defaultConnectionString = "Data Source=(local);Initial Catalog=MyLibrary;Integrated Security=True";
 
-            // Создаем объект построения конфигурации, которую будем брать из файла appsettings.json
-            var configurationBuilder =
+            // Строим конфигурацию из файла appsettings.json и из секретов пользователя.
+            // Оба источника необязательны: если файла нет, исключение не выбрасывается.
+            // Значения из секретов перекрывают значения из appsettings.json.
+            IConfiguration configuration =
                 new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
-            // Пытаемся создать собственно объект конфигурации, если такой файл существует
-            IConfiguration configuration = null;
-            try
-            {
-                configuration = configurationBuilder.Build();
-            }
-            catch (FileNotFoundException)
-            {
-            }
+                    .AddJsonFile("appsettings.json", optional: true)
+                    .AddUserSecrets(typeof(GlobalOptions).Assembly)
+                    .Build();
 
-            // Получаем строку подключения из параметра конфигурации DatabaseConnection  или null,
-            // если файла appsettings.json или параметра DatabaseConnection в нем не существует
-            string connectionString = configuration?.GetConnectionString("DatabaseConnection");
+            // Получаем строку подключения из параметра конфигурации ConnectionStrings:Database или null,
+            // если этого параметра нет ни в appsettings.json, ни в секретах
+            string connectionString = configuration.GetConnectionString("Database");
 
             return !string.IsNullOrEmpty(connectionString) ? connectionString : defaultConnectionString;
         }

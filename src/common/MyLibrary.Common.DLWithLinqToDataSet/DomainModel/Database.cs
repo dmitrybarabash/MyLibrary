@@ -10,74 +10,74 @@ namespace MyLibrary.Common.DLWithLinqToDataSet.DomainModel;
 
 public class Database : IDatabase
 {
-    private readonly SqlConnection connection = new();
-    private readonly DataSet dataSet = new("MyLibrary");
-    private readonly SqlDataAdapter authorsAdapter;
-    private readonly SqlDataAdapter pressesAdapter;
-    private readonly SqlDataAdapter booksAdapter;
+    private readonly SqlConnection _connection = new();
+    private readonly DataSet _dataSet = new("MyLibrary");
+    private readonly SqlDataAdapter _authorsAdapter;
+    private readonly SqlDataAdapter _pressesAdapter;
+    private readonly SqlDataAdapter _booksAdapter;
 
     public Database()
     {
-        connection.ConnectionString = GlobalOptions.ConnectionString;
-        connection.Open();
+        _connection.ConnectionString = GlobalOptions.ConnectionString;
+        _connection.Open();
 
         //
         // Команды адаптера для таблицы Authors
         //
 
-        authorsAdapter = new SqlDataAdapter("SELECT * FROM Authors", connection);
+        _authorsAdapter = new SqlDataAdapter("SELECT * FROM Authors", _connection);
 
-        authorsAdapter.InsertCommand = new SqlCommand("INSERT INTO Authors (Name) VALUES (@Name)", connection);
-        authorsAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+        _authorsAdapter.InsertCommand = new SqlCommand("INSERT INTO Authors (Name) VALUES (@Name)", _connection);
+        _authorsAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
-        authorsAdapter.UpdateCommand = new SqlCommand("UPDATE Authors SET Name = @Name WHERE Id = @Id", connection);
-        authorsAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
-        authorsAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+        _authorsAdapter.UpdateCommand = new SqlCommand("UPDATE Authors SET Name = @Name WHERE Id = @Id", _connection);
+        _authorsAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _authorsAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
-        authorsAdapter.DeleteCommand = new SqlCommand("DELETE FROM Authors WHERE Id = @Id", connection);
-        authorsAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _authorsAdapter.DeleteCommand = new SqlCommand("DELETE FROM Authors WHERE Id = @Id", _connection);
+        _authorsAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
 
 
         //
         // Команды адаптера для таблицы Presses
         //
 
-        pressesAdapter = new SqlDataAdapter("SELECT * FROM Presses", connection);
+        _pressesAdapter = new SqlDataAdapter("SELECT * FROM Presses", _connection);
 
-        pressesAdapter.InsertCommand = new SqlCommand("INSERT INTO Presses (Name) VALUES (@Name)", connection);
-        pressesAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+        _pressesAdapter.InsertCommand = new SqlCommand("INSERT INTO Presses (Name) VALUES (@Name)", _connection);
+        _pressesAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
-        pressesAdapter.UpdateCommand = new SqlCommand("UPDATE Presses SET Name = @Name WHERE Id = @Id", connection);
-        pressesAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
-        pressesAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+        _pressesAdapter.UpdateCommand = new SqlCommand("UPDATE Presses SET Name = @Name WHERE Id = @Id", _connection);
+        _pressesAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _pressesAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
-        pressesAdapter.DeleteCommand = new SqlCommand("DELETE FROM Presses WHERE Id = @Id", connection);
-        pressesAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _pressesAdapter.DeleteCommand = new SqlCommand("DELETE FROM Presses WHERE Id = @Id", _connection);
+        _pressesAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
 
 
         //
         // Команды адаптера для таблицы Books
         //
 
-        booksAdapter = new SqlDataAdapter("SELECT * FROM Books", connection);
+        _booksAdapter = new SqlDataAdapter("SELECT * FROM Books", _connection);
 
-        booksAdapter.InsertCommand = new SqlCommand("INSERT INTO Books (AuthorFk, Name, Pages, Price, PressFk) VALUES (@AuthorFk, @Name, @Pages, @Price, @PressFk)", connection);
-        booksAdapter.InsertCommand.Parameters.Add("@AuthorFk", SqlDbType.BigInt, 8, "AuthorFk");
-        booksAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 100, "Name");
-        booksAdapter.InsertCommand.Parameters.Add("@Pages", SqlDbType.Int, 4, "Pages");
-        booksAdapter.InsertCommand.Parameters.Add("@Price", SqlDbType.Money, 8, "Price");
-        booksAdapter.InsertCommand.Parameters.Add("@PressFk", SqlDbType.BigInt, 8, "PressFk");
+        _booksAdapter.InsertCommand = new SqlCommand("INSERT INTO Books (AuthorFk, Name, Pages, Price, PressFk) VALUES (@AuthorFk, @Name, @Pages, @Price, @PressFk)", _connection);
+        _booksAdapter.InsertCommand.Parameters.Add("@AuthorFk", SqlDbType.BigInt, 8, "AuthorFk");
+        _booksAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 100, "Name");
+        _booksAdapter.InsertCommand.Parameters.Add("@Pages", SqlDbType.Int, 4, "Pages");
+        _booksAdapter.InsertCommand.Parameters.Add("@Price", SqlDbType.Money, 8, "Price");
+        _booksAdapter.InsertCommand.Parameters.Add("@PressFk", SqlDbType.BigInt, 8, "PressFk");
 
-        booksAdapter.UpdateCommand = new SqlCommand("UPDATE Books SET AuthorFk = @AuthorFk, Name = @Name, Pages = @Pages, Price = @Price, PressFk = @PressFk WHERE Id = @Id", connection);
-        booksAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
-        booksAdapter.UpdateCommand.Parameters.Add("@AuthorFk", SqlDbType.BigInt, 8, "AuthorFk");
-        booksAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 100, "Name");
-        booksAdapter.UpdateCommand.Parameters.Add("@Pages", SqlDbType.Int, 4, "Pages");
-        booksAdapter.UpdateCommand.Parameters.Add("@Price", SqlDbType.Money, 8, "Price");
-        booksAdapter.UpdateCommand.Parameters.Add("@PressFk", SqlDbType.BigInt, 8, "PressFk");
+        _booksAdapter.UpdateCommand = new SqlCommand("UPDATE Books SET AuthorFk = @AuthorFk, Name = @Name, Pages = @Pages, Price = @Price, PressFk = @PressFk WHERE Id = @Id", _connection);
+        _booksAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _booksAdapter.UpdateCommand.Parameters.Add("@AuthorFk", SqlDbType.BigInt, 8, "AuthorFk");
+        _booksAdapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 100, "Name");
+        _booksAdapter.UpdateCommand.Parameters.Add("@Pages", SqlDbType.Int, 4, "Pages");
+        _booksAdapter.UpdateCommand.Parameters.Add("@Price", SqlDbType.Money, 8, "Price");
+        _booksAdapter.UpdateCommand.Parameters.Add("@PressFk", SqlDbType.BigInt, 8, "PressFk");
 
-        booksAdapter.DeleteCommand = new SqlCommand("DELETE FROM Books WHERE Id = @Id", connection);
-        booksAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
+        _booksAdapter.DeleteCommand = new SqlCommand("DELETE FROM Books WHERE Id = @Id", _connection);
+        _booksAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.BigInt, 8, "Id");
 
 
         //
@@ -90,63 +90,63 @@ public class Database : IDatabase
     private void ReloadAuthors()
     {
         // Сначала очищаем дочернюю Books и только после этого Authors
-        if (dataSet.Tables.Contains("Books"))
-            dataSet.Tables["Books"].Clear();
-        if (dataSet.Tables.Contains("Authors"))
-            dataSet.Tables["Authors"].Clear();
+        if (_dataSet.Tables.Contains("Books"))
+            _dataSet.Tables["Books"].Clear();
+        if (_dataSet.Tables.Contains("Authors"))
+            _dataSet.Tables["Authors"].Clear();
 
         // Пересчитываем Authors, после чего обратно пересчитываем и Books
-        authorsAdapter.Fill(dataSet, "Authors");
-        booksAdapter.Fill(dataSet, "Books");
+        _authorsAdapter.Fill(_dataSet, "Authors");
+        _booksAdapter.Fill(_dataSet, "Books");
     }
 
     private void ReloadPresses()
     {
         // Сначала очищаем дочернюю Books и только после этого Presses
-        if (dataSet.Tables.Contains("Books"))
-            dataSet.Tables["Books"].Clear();
-        if (dataSet.Tables.Contains("Presses"))
-            dataSet.Tables["Presses"].Clear();
+        if (_dataSet.Tables.Contains("Books"))
+            _dataSet.Tables["Books"].Clear();
+        if (_dataSet.Tables.Contains("Presses"))
+            _dataSet.Tables["Presses"].Clear();
 
         // Пересчитываем Presses, после чего обратно пересчитываем и Books
-        pressesAdapter.Fill(dataSet, "Presses");
-        booksAdapter.Fill(dataSet, "Books");
+        _pressesAdapter.Fill(_dataSet, "Presses");
+        _booksAdapter.Fill(_dataSet, "Books");
     }
 
     private void ReloadBooks()
     {
         // Очищаем Books
-        if (dataSet.Tables.Contains("Books"))
-            dataSet.Tables["Books"].Clear();
+        if (_dataSet.Tables.Contains("Books"))
+            _dataSet.Tables["Books"].Clear();
 
         // Пересчитываем Books
-        booksAdapter.Fill(dataSet, "Books");
+        _booksAdapter.Fill(_dataSet, "Books");
     }
 
     private void ReloadDataSet()
     {
-        dataSet.Clear();
+        _dataSet.Clear();
 
         // Сначала очищаем дочернюю Books и только после этого Authors и Presses
-        if (dataSet.Tables.Contains("Books"))
-            dataSet.Tables["Books"].Clear();
-        if (dataSet.Tables.Contains("Authors"))
-            dataSet.Tables["Authors"].Clear();
-        if (dataSet.Tables.Contains("Presses"))
-            dataSet.Tables["Presses"].Clear();
+        if (_dataSet.Tables.Contains("Books"))
+            _dataSet.Tables["Books"].Clear();
+        if (_dataSet.Tables.Contains("Authors"))
+            _dataSet.Tables["Authors"].Clear();
+        if (_dataSet.Tables.Contains("Presses"))
+            _dataSet.Tables["Presses"].Clear();
 
         // Пересчитываем Authors и Presses, после чего обратно пересчитываем и Books
-        authorsAdapter.Fill(dataSet, "Authors");
-        pressesAdapter.Fill(dataSet, "Presses");
-        booksAdapter.Fill(dataSet, "Books");
+        _authorsAdapter.Fill(_dataSet, "Authors");
+        _pressesAdapter.Fill(_dataSet, "Presses");
+        _booksAdapter.Fill(_dataSet, "Books");
     }
 
     #region IDisposable implementation
 
     public void Dispose()
     {
-        if (connection.State == ConnectionState.Open)
-            connection.Close();
+        if (_connection.State == ConnectionState.Open)
+            _connection.Close();
     }
 
     #endregion
@@ -161,7 +161,7 @@ public class Database : IDatabase
     {
         // Синтаксис методов
         //return
-        //    dataSet.Tables["Authors"]
+        //    _dataSet.Tables["Authors"]
         //        .AsEnumerable()
         //        .Select(row => new Author
         //        {
@@ -172,7 +172,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var authors =
-            from row in dataSet.Tables["Authors"].AsEnumerable()
+            from row in _dataSet.Tables["Authors"].AsEnumerable()
             select new Author
             {
                 Id = Convert.ToInt64(row["Id"]),
@@ -184,7 +184,7 @@ public class Database : IDatabase
     public Author GetAuthorById(long id)
     {
         // Синтаксис методов
-        //var dataRow = dataSet.Tables["Authors"]
+        //var dataRow = _dataSet.Tables["Authors"]
         //    .AsEnumerable()
         //    .Where(row => Convert.ToInt64(row["Id"]) == id)
         //    .Select(row => row)
@@ -192,7 +192,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var dataRow =
-            (from row in dataSet.Tables["Authors"].AsEnumerable()
+            (from row in _dataSet.Tables["Authors"].AsEnumerable()
              where Convert.ToInt64(row["Id"]) == id
              select row)
             .SingleOrDefault();
@@ -209,18 +209,18 @@ public class Database : IDatabase
 
     public long InsertAuthor(Author author)
     {
-        DataTable authorsTable = dataSet.Tables["Authors"];
+        DataTable authorsTable = _dataSet.Tables["Authors"];
         DataRow newRow = authorsTable.NewRow();
         newRow["Name"] = author.Name;
         authorsTable.Rows.Add(newRow);
-        authorsAdapter.Update(authorsTable);
+        _authorsAdapter.Update(authorsTable);
 
         // Переменная для автоматически сгенерированного значения автоинкремента
         // только что добавленной записи
         long id;
         // Получаем последнее выданное БД значение автоинкремента
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -234,16 +234,16 @@ public class Database : IDatabase
 
     public void UpdateAuthor(Author author)
     {
-        DataTable authorsTable = dataSet.Tables["Authors"];
+        DataTable authorsTable = _dataSet.Tables["Authors"];
         foreach (DataRow row in authorsTable.Rows)
             if (Convert.ToInt64(row["Id"]) == author.Id)
                 row["Name"] = author.Name;
-        authorsAdapter.Update(authorsTable);
+        _authorsAdapter.Update(authorsTable);
     }
 
     public void DeleteAuthor(long id)
     {
-        DataTable authorsTable = dataSet.Tables["Authors"];
+        DataTable authorsTable = _dataSet.Tables["Authors"];
 
         // Вариант с каскадным удалением из Books в памяти без ее пересчитывания
         //foreach (DataRow row in authorsTable.Rows)
@@ -251,25 +251,25 @@ public class Database : IDatabase
         //    if (Convert.ToInt64(row["Id"]) == id)
         //    {
         //        // Сначала удаляем книги этого автора
-        //        DataTable booksTable = dataSet.Tables["Books"];
+        //        DataTable booksTable = _dataSet.Tables["Books"];
         //        foreach (DataRow bookRow in booksTable.Rows)
         //        {
         //            if (Convert.ToInt64(bookRow["AuthorFk"]) == id)
         //                bookRow.Delete();
         //        }
-        //        booksAdapter.Update(booksTable);
+        //        _booksAdapter.Update(booksTable);
 
         //        // А потом уже самого автора
         //        row.Delete();
         //    }
         //}
-        //authorsAdapter.Update(authorsTable);
+        //_authorsAdapter.Update(authorsTable);
 
         // Вариант с каскадным удалением из Books в БД и пересчитыванием ее в память
         foreach (DataRow row in authorsTable.Rows)
             if (Convert.ToInt64(row["Id"]) == id)
                 row.Delete();
-        authorsAdapter.Update(authorsTable);
+        _authorsAdapter.Update(authorsTable);
 
         // Поскольку в БД сработало каскадное удаление и из таблицы Books
         // также были удалены книги удаленного автора, то пересчитываем ее
@@ -285,7 +285,7 @@ public class Database : IDatabase
     {
         // Синтаксис методов
         //return
-        //    dataSet.Tables["Presses"]
+        //    _dataSet.Tables["Presses"]
         //        .AsEnumerable()
         //        .Select(row => new Press
         //        {
@@ -296,7 +296,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var presses =
-            from row in dataSet.Tables["Presses"].AsEnumerable()
+            from row in _dataSet.Tables["Presses"].AsEnumerable()
             select new Press
             {
                 Id = Convert.ToInt64(row["Id"]),
@@ -308,7 +308,7 @@ public class Database : IDatabase
     public Press GetPressById(long id)
     {
         // Синтаксис методов
-        //var dataRow = dataSet.Tables["Presses"]
+        //var dataRow = _dataSet.Tables["Presses"]
         //    .AsEnumerable()
         //    .Where(row => Convert.ToInt64(row["Id"]) == id)
         //    .Select(row => row)
@@ -316,7 +316,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var dataRow =
-            (from row in dataSet.Tables["Presses"].AsEnumerable()
+            (from row in _dataSet.Tables["Presses"].AsEnumerable()
              where Convert.ToInt64(row["Id"]) == id
              select row)
             .SingleOrDefault();
@@ -332,18 +332,18 @@ public class Database : IDatabase
 
     public long InsertPress(Press press)
     {
-        DataTable pressesTable = dataSet.Tables["Presses"];
+        DataTable pressesTable = _dataSet.Tables["Presses"];
         DataRow newRow = pressesTable.NewRow();
         newRow["Name"] = press.Name;
         pressesTable.Rows.Add(newRow);
-        pressesAdapter.Update(pressesTable);
+        _pressesAdapter.Update(pressesTable);
 
         // Переменная для автоматически сгенерированного значения автоинкремента
         // только что добавленной записи
         long id;
         // Получаем последнее выданное БД значение автоинкремента
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -357,16 +357,16 @@ public class Database : IDatabase
 
     public void UpdatePress(Press press)
     {
-        DataTable pressesTable = dataSet.Tables["Presses"];
+        DataTable pressesTable = _dataSet.Tables["Presses"];
         foreach (DataRow row in pressesTable.Rows)
             if (Convert.ToInt64(row["Id"]) == press.Id)
                 row["Name"] = press.Name;
-        pressesAdapter.Update(pressesTable);
+        _pressesAdapter.Update(pressesTable);
     }
 
     public void DeletePress(long id)
     {
-        DataTable pressesTable = dataSet.Tables["Presses"];
+        DataTable pressesTable = _dataSet.Tables["Presses"];
 
         // Вариант с каскадным удалением из Books в памяти без ее пересчитывания
         //foreach (DataRow row in pressesTable.Rows)
@@ -374,25 +374,25 @@ public class Database : IDatabase
         //    if (Convert.ToInt64(row["Id"]) == id)
         //    {
         //        // Сначала удаляем книги этого издательства
-        //        DataTable booksTable = dataSet.Tables["Books"];
+        //        DataTable booksTable = _dataSet.Tables["Books"];
         //        foreach (DataRow bookRow in booksTable.Rows)
         //        {
         //            if (Convert.ToInt64(bookRow["PressFk"]) == id)
         //                bookRow.Delete();
         //        }
-        //        booksAdapter.Update(booksTable);
+        //        _booksAdapter.Update(booksTable);
 
         //        // А потом уже само издательство
         //        row.Delete();
         //    }
         //}
-        //pressesAdapter.Update(pressesTable);
+        //_pressesAdapter.Update(pressesTable);
 
         // Вариант с каскадным удалением из Books в БД и пересчитыванием ее в память
         foreach (DataRow row in pressesTable.Rows)
             if (Convert.ToInt64(row["Id"]) == id)
                 row.Delete();
-        pressesAdapter.Update(pressesTable);
+        _pressesAdapter.Update(pressesTable);
 
         // Поскольку в БД сработало каскадное удаление и из таблицы Books
         // также были удалены книги удаленного автора, то пересчитываем ее
@@ -408,7 +408,7 @@ public class Database : IDatabase
     {
         // Синтаксис методов
         //return
-        //    dataSet.Tables["Books"]
+        //    _dataSet.Tables["Books"]
         //        .AsEnumerable()
         //        .Select(row => new Book
         //        {
@@ -423,7 +423,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var books =
-            from row in dataSet.Tables["Books"].AsEnumerable()
+            from row in _dataSet.Tables["Books"].AsEnumerable()
             select new Book
             {
                 Id = Convert.ToInt64(row["Id"]),
@@ -439,7 +439,7 @@ public class Database : IDatabase
     public Book GetBookById(long id)
     {
         // Синтаксис методов
-        //var dataRow = dataSet.Tables["Books"]
+        //var dataRow = _dataSet.Tables["Books"]
         //    .AsEnumerable()
         //    .Where(row => Convert.ToInt64(row["Id"]) == id)
         //    .Select(row => row)
@@ -447,7 +447,7 @@ public class Database : IDatabase
 
         // Синтаксис запросов
         var dataRow =
-            (from row in dataSet.Tables["Books"].AsEnumerable()
+            (from row in _dataSet.Tables["Books"].AsEnumerable()
              where Convert.ToInt64(row["Id"]) == id
              select row)
             .SingleOrDefault();
@@ -467,7 +467,7 @@ public class Database : IDatabase
 
     public long InsertBook(Book book)
     {
-        DataTable booksTable = dataSet.Tables["Books"];
+        DataTable booksTable = _dataSet.Tables["Books"];
         DataRow newRow = booksTable.NewRow();
         newRow["Name"] = book.Name;
         newRow["AuthorFk"] = book.AuthorFk;
@@ -476,14 +476,14 @@ public class Database : IDatabase
         newRow["Price"] = book.Price;
         newRow["PressFk"] = book.PressFk;
         booksTable.Rows.Add(newRow);
-        booksAdapter.Update(booksTable);
+        _booksAdapter.Update(booksTable);
 
         // Переменная для автоматически сгенерированного значения автоинкремента
         // только что добавленной записи
         long id;
         // Получаем последнее выданное БД значение автоинкремента
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -497,7 +497,7 @@ public class Database : IDatabase
 
     public void UpdateBook(Book book)
     {
-        DataTable booksTable = dataSet.Tables["Books"];
+        DataTable booksTable = _dataSet.Tables["Books"];
         foreach (DataRow row in booksTable.Rows)
         {
             if (Convert.ToInt64(row["Id"]) == book.Id)
@@ -510,16 +510,16 @@ public class Database : IDatabase
                 row["PressFk"] = book.PressFk;
             }
         }
-        booksAdapter.Update(booksTable);
+        _booksAdapter.Update(booksTable);
     }
 
     public void DeleteBook(long id)
     {
-        DataTable booksTable = dataSet.Tables["Books"];
+        DataTable booksTable = _dataSet.Tables["Books"];
         foreach (DataRow row in booksTable.Rows)
             if (Convert.ToInt64(row["Id"]) == id)
                 row.Delete();
-        booksAdapter.Update(booksTable);
+        _booksAdapter.Update(booksTable);
     }
 
     #endregion

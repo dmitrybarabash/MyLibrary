@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net11.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationIcon>MyLibrary.ico</ApplicationIcon>
+
+    <AssemblyTitle>MyLibrary Windows Forms Application (Entity Framework Core)</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>

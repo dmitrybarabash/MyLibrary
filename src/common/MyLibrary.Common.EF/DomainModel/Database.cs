@@ -8,7 +8,7 @@ namespace MyLibrary.Common.EF.DomainModel;
 
 public class Database : IDatabase
 {
-    private readonly MyLibraryContext context;
+    private readonly MyLibraryContext _context;
 
     public Database()
     {
@@ -20,14 +20,14 @@ public class Database : IDatabase
                 .Options;
 
         // Создаем контекст EF
-        context = new MyLibraryContext(options);
+        _context = new MyLibraryContext(options);
     }
 
     #region IDisposable implementation
 
     public void Dispose()
     {
-        context.Dispose();
+        _context.Dispose();
     }
 
     #endregion
@@ -40,45 +40,45 @@ public class Database : IDatabase
 
     public IEnumerable<Author> GetAllAuthors()
     {
-        return context.Authors.ToList();
+        return _context.Authors.ToList();
     }
 
     public Author GetAuthorById(long id)
     {
-        return context.Authors.Find(id);
+        return _context.Authors.Find(id);
     }
 
     public long InsertAuthor(Author author)
     {
-        context.Authors.Add(author);
-        context.SaveChanges();
+        _context.Authors.Add(author);
+        _context.SaveChanges();
 
         // В этом нет необходимости, поскольку EF по после вызова SaveChanges()
         // сам заполняет автоинкрементные поля в добавленных объектах в соответствии
         // с полученными значениями для этих полей при добавлении в БД
-        //return Convert.ToInt64(context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Authors')").SingleOrDefault());
+        //return Convert.ToInt64(_context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Authors')").SingleOrDefault());
 
         return author.Id;
     }
 
     public void UpdateAuthor(Author author)
     {
-        Author a = context.Authors.Find(author.Id);
+        Author a = _context.Authors.Find(author.Id);
         if (a is not null)
         {
             a.Name = author.Name;
-            context.Entry(a).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(a).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 
     public void DeleteAuthor(long id)
     {
-        Author author = context.Authors.Find(id);
+        Author author = _context.Authors.Find(id);
         if (author is not null)
         {
-            context.Authors.Remove(author);
-            context.SaveChanges();
+            _context.Authors.Remove(author);
+            _context.SaveChanges();
         }
     }
 
@@ -89,45 +89,45 @@ public class Database : IDatabase
 
     public IEnumerable<Press> GetAllPresses()
     {
-        return context.Presses.ToList();
+        return _context.Presses.ToList();
     }
 
     public Press GetPressById(long id)
     {
-        return context.Presses.Find(id);
+        return _context.Presses.Find(id);
     }
 
     public long InsertPress(Press press)
     {
-        context.Presses.Add(press);
-        context.SaveChanges();
+        _context.Presses.Add(press);
+        _context.SaveChanges();
 
         // В этом нет необходимости, поскольку EF по после вызова SaveChanges()
         // сам заполняет автоинкрементные поля в добавленных объектах в соответствии
         // с полученными значениями для этих полей при добавлении в БД
-        //return Convert.ToInt64(context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Presses')").SingleOrDefault());
+        //return Convert.ToInt64(_context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Presses')").SingleOrDefault());
 
         return press.Id;
     }
 
     public void UpdatePress(Press press)
     {
-        Press p = context.Presses.Find(press.Id);
+        Press p = _context.Presses.Find(press.Id);
         if (p is not null)
         {
             p.Name = press.Name;
-            context.Entry(p).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(p).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 
     public void DeletePress(long id)
     {
-        Press press = context.Presses.Find(id);
+        Press press = _context.Presses.Find(id);
         if (press is not null)
         {
-            context.Presses.Remove(press);
-            context.SaveChanges();
+            _context.Presses.Remove(press);
+            _context.SaveChanges();
         }
     }
 
@@ -138,30 +138,30 @@ public class Database : IDatabase
 
     public IEnumerable<Book> GetAllBooks()
     {
-        return context.Books.ToList();
+        return _context.Books.ToList();
     }
 
     public Book GetBookById(long id)
     {
-        return context.Books.Find(id);
+        return _context.Books.Find(id);
     }
 
     public long InsertBook(Book book)
     {
-        context.Books.Add(book);
-        context.SaveChanges();
+        _context.Books.Add(book);
+        _context.SaveChanges();
 
         // В этом нет необходимости, поскольку EF по после вызова SaveChanges()
         // сам заполняет автоинкрементные поля в добавленных объектах в соответствии
         // с полученными значениями для этих полей при добавлении в БД
-        //return Convert.ToInt64(context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Books')").SingleOrDefault());
+        //return Convert.ToInt64(_context.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('Books')").SingleOrDefault());
 
         return book.Id;
     }
 
     public void UpdateBook(Book book)
     {
-        Book b = context.Books.Find(book.Id);
+        Book b = _context.Books.Find(book.Id);
         if (b is not null)
         {
             b.Name = book.Name;
@@ -169,18 +169,18 @@ public class Database : IDatabase
             b.Pages = book.Pages;
             b.Price = book.Price;
             b.PressFk = book.PressFk;
-            context.Entry(b).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(b).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 
     public void DeleteBook(long id)
     {
-        Book book = context.Books.Find(id);
+        Book book = _context.Books.Find(id);
         if (book is not null)
         {
-            context.Books.Remove(book);
-            context.SaveChanges();
+            _context.Books.Remove(book);
+            _context.SaveChanges();
         }
     }
 

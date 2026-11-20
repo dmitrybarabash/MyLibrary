@@ -4,38 +4,38 @@ namespace MyLibrary.Common.DomainModel;
 
 public class BookRepository : IRepository<Book>
 {
-    private readonly IDatabase db;
+    private readonly IDatabase _db;
 
     public BookRepository(IDatabase database)
     {
-        db = database;
+        _db = database;
     }
 
     #region IRepository<Book> implementation
 
     public IEnumerable<Book> GetAll()
     {
-        return db.GetAllBooks();
+        return _db.GetAllBooks();
     }
 
     public Book GetById(long id)
     {
-        return db.GetBookById(id);
+        return _db.GetBookById(id);
     }
 
     public long Add(Book book)
     {
-        return db.InsertBook(book);
+        return _db.InsertBook(book);
     }
 
     public void Update(Book book)
     {
-        db.UpdateBook(book);
+        _db.UpdateBook(book);
     }
 
     public void Delete(long id)
     {
-        db.DeleteBook(id);
+        _db.DeleteBook(id);
     }
 
     #endregion

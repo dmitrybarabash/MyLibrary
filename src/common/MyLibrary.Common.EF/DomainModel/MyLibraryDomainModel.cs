@@ -4,14 +4,14 @@ namespace MyLibrary.Common.EF.DomainModel;
 
 public class MyLibraryDomainModel : IMyLibraryDomainModel
 {
-    private readonly IDatabase db;
+    private readonly IDatabase _db;
 
     public MyLibraryDomainModel()
     {
-        db = new Database();
-        AuthorRepository = new AuthorRepository(db);
-        PressRepository = new PressRepository(db);
-        BookRepository = new BookRepository(db);
+        _db = new Database();
+        AuthorRepository = new AuthorRepository(_db);
+        PressRepository = new PressRepository(_db);
+        BookRepository = new BookRepository(_db);
     }
 
     #region IMyLibraryDomainModel implementation
@@ -21,7 +21,7 @@ public class MyLibraryDomainModel : IMyLibraryDomainModel
     public IRepository<Book> BookRepository { get; }
 
     public void Dispose() =>
-        db.Dispose();
+        _db.Dispose();
 
     #endregion
 }

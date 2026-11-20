@@ -9,20 +9,20 @@ namespace MyLibrary.Common.CL.DomainModel;
 
 public class Database : IDatabase
 {
-    private readonly SqlConnection connection = new();
+    private readonly SqlConnection _connection = new();
 
     public Database()
     {
-        connection.ConnectionString = GlobalOptions.ConnectionString;
-        connection.Open();
+        _connection.ConnectionString = GlobalOptions.ConnectionString;
+        _connection.Open();
     }
 
     #region IDisposable implementation
 
     public void Dispose()
     {
-        if (connection.State == ConnectionState.Open)
-            connection.Close();
+        if (_connection.State == ConnectionState.Open)
+            _connection.Close();
     }
 
     #endregion
@@ -39,7 +39,7 @@ public class Database : IDatabase
 
         string sqlString = "SELECT Id, Name FROM Authors";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         using (SqlDataReader reader = command.ExecuteReader())
         {
             while (reader.Read())
@@ -59,7 +59,7 @@ public class Database : IDatabase
     {
         string sqlString = "SELECT Id, Name FROM Authors WHERE Id = @Id";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -82,7 +82,7 @@ public class Database : IDatabase
     public long InsertAuthor(Author author)
     {
         string sqlString = "INSERT INTO Authors (Name) VALUES (@Name)";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Name", author.Name));
             command.ExecuteNonQuery();
@@ -91,7 +91,7 @@ public class Database : IDatabase
         long id;
 
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -103,7 +103,7 @@ public class Database : IDatabase
     public void UpdateAuthor(Author author)
     {
         string sqlString = "UPDATE Authors SET Name = @Name WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", author.Id));
             command.Parameters.Add(new SqlParameter("@Name", author.Name));
@@ -114,7 +114,7 @@ public class Database : IDatabase
     public void DeleteAuthor(long id)
     {
         string sqlString = "DELETE FROM Authors WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
             command.ExecuteNonQuery();
@@ -132,7 +132,7 @@ public class Database : IDatabase
 
         string sqlString = "SELECT Id, Name FROM Presses";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         using (SqlDataReader reader = command.ExecuteReader())
         {
             while (reader.Read())
@@ -152,7 +152,7 @@ public class Database : IDatabase
     {
         string sqlString = "SELECT Id, Name FROM Presses WHERE Id = @Id";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -175,7 +175,7 @@ public class Database : IDatabase
     public long InsertPress(Press press)
     {
         string sqlString = "INSERT INTO Presses (Name) VALUES (@Name)";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Name", press.Name));
             command.ExecuteNonQuery();
@@ -184,7 +184,7 @@ public class Database : IDatabase
         long id;
 
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -196,7 +196,7 @@ public class Database : IDatabase
     public void UpdatePress(Press press)
     {
         string sqlString = "UPDATE Presses SET Name = @Name WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", press.Id));
             command.Parameters.Add(new SqlParameter("@Name", press.Name));
@@ -207,7 +207,7 @@ public class Database : IDatabase
     public void DeletePress(long id)
     {
         string sqlString = "DELETE FROM Presses WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
             command.ExecuteNonQuery();
@@ -225,7 +225,7 @@ public class Database : IDatabase
 
         string sqlString = "SELECT Id, AuthorFk, Name, Pages, Price, PressFk FROM Books";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         using (SqlDataReader reader = command.ExecuteReader())
         {
             while (reader.Read())
@@ -249,7 +249,7 @@ public class Database : IDatabase
     {
         string sqlString = "SELECT Id, AuthorFk, Name, Pages, Price, PressFk FROM Books WHERE Id = @Id";
 
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
 
@@ -276,7 +276,7 @@ public class Database : IDatabase
     public long InsertBook(Book book)
     {
         string sqlString = "INSERT INTO Books (AuthorFk, Name, Pages, Price, PressFk) VALUES (@AuthorFk, @Name, @Pages, @Price, @PressFk)";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@AuthorFk", book.AuthorFk));
             command.Parameters.Add(new SqlParameter("@Name", book.Name));
@@ -289,7 +289,7 @@ public class Database : IDatabase
         long id;
 
         string sqlGetIdString = "SELECT @@IDENTITY";
-        using (var commandId = new SqlCommand(sqlGetIdString, connection))
+        using (var commandId = new SqlCommand(sqlGetIdString, _connection))
         {
             object obj = commandId.ExecuteScalar();
             id = Convert.ToInt64(obj);
@@ -301,7 +301,7 @@ public class Database : IDatabase
     public void UpdateBook(Book book)
     {
         string sqlString = "UPDATE Books SET AuthorFk = @AuthorFk, Name = @Name, Pages = @Pages, Price = @Price, PressFk = @PressFk WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", book.Id));
             command.Parameters.Add(new SqlParameter("@AuthorFk", book.AuthorFk));
@@ -316,7 +316,7 @@ public class Database : IDatabase
     public void DeleteBook(long id)
     {
         string sqlString = "DELETE FROM Books WHERE Id = @Id";
-        using (var command = new SqlCommand(sqlString, connection))
+        using (var command = new SqlCommand(sqlString, _connection))
         {
             command.Parameters.Add(new SqlParameter("@Id", id));
             command.ExecuteNonQuery();

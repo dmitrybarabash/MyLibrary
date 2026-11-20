@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Linq;
 using MyLibrary.Common.DomainModel;
 using MyLibrary.Common.Utilities;
 using MyLibrary.WinForms.Common.Mvp;
@@ -11,15 +11,19 @@ namespace MyLibrary.WinForms.Common.Presenters;
 public class PressesPresenter : BasePresenter<IRefView>
 {
     private IMyLibraryDomainModel Model { get; set; }
+    private IViewFactory ViewFactory { get; set; }
+    // Издательства в том же порядке, в каком они показаны в представлении
+    private List<Press> Presses { get; set; } = [];
 
-    public PressesPresenter(IMyLibraryDomainModel domainModel, IRefView refView)
+    public PressesPresenter(IMyLibraryDomainModel domainModel, IRefView refView, IViewFactory viewFactory)
     {
-        // Сохраняем внедряемые ссылки на модель и представление
+        // Сохраняем внедряемые ссылки на модель, представление и фабрику представлений
         Model = domainModel;
         View = refView;
+        ViewFactory = viewFactory;
         // Настраиваем представление
         View.Title = "Издательства";
-        View.ListViewTheOnlyColumnName = "Название";
+        View.ColumnName = "Название";
         // Подписываемся на события представления
         View.Loaded += OnLoaded;
         View.Add += OnAdd;
@@ -45,22 +49,21 @@ public class PressesPresenter : BasePresenter<IRefView>
 
     private void OnAdd(object sender, EventArgs e)
     {
-        var refItemForm = new RefItemForm();
-        refItemForm.Text = "Новое издательство";
-        refItemForm.GroupBoxText = "Информация о новом издательстве";
-        refItemForm.LabelText = "Издательство:";
+        var refItemPresenter = new RefItemPresenter(ViewFactory.CreateRefItemView());
+        refItemPresenter.View.Title = "Новое издательство";
+        refItemPresenter.View.Heading = "Информация о новом издательстве";
+        refItemPresenter.View.ItemLabel = "Издательство:";
 
-        if (refItemForm.ShowDialog() == DialogResult.OK)
+        if (refItemPresenter.View.ShowDialog())
         {
             try
             {
-                var newPress = new Press { Id = 0, Name = refItemForm.ItemText };
+                var newPress = new Press { Id = 0, Name = refItemPresenter.View.ItemText };
                 Model.PressRepository.Add(newPress);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при добавлении нового издательства.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при добавлении нового издательства.");
                 Utils.Log.Trace(ex);
             }
 
@@ -68,48 +71,48 @@ public class PressesPresenter : BasePresenter<IRefView>
             UpdateView();
 
             // Выделяем добавленное (последнее в списке) издательство
-            View.ListView.Select();
-            View.ListView.Items[View.ListView.Items.Count - 1].Selected = true;
-            View.ListView.EnsureVisible(View.ListView.Items.Count - 1);
+            if (Presses.Count > 0)
+                View.SelectItems([Presses.Count - 1]);
         }
         else
         {
             // Восстанавливаем фокус и выделение издательств
-            View.ListView.Select();
+            View.FocusItemList();
         }
     }
 
     private void OnEdit(object sender, EventArgs e)
     {
-        // Проверяем, есть ли хотя бы один выделенный элемент в списке книг
-        if (View.ListView.SelectedItems.Count == 0)
+        IReadOnlyList<int> selectedIndices = View.SelectedItemIndices;
+
+        // Проверяем, есть ли хотя бы один выделенный элемент в списке издательств
+        if (selectedIndices.Count == 0)
             return;
 
         // Если выделенных элементов несколько, то берем первый из них
-        int selectedIndex = View.ListView.SelectedIndices[0];
-        Press press = (Press)View.ListView.Items[selectedIndex].Tag;
+        int selectedIndex = selectedIndices[0];
+        Press press = Presses[selectedIndex];
 
-        var refItemForm = new RefItemForm();
-        refItemForm.Text = "Изменение существующего издательства";
-        refItemForm.GroupBoxText = "Информация об издательстве";
-        refItemForm.LabelText = "Издательство:";
-        refItemForm.ItemText = press.Name;
+        var refItemPresenter = new RefItemPresenter(ViewFactory.CreateRefItemView());
+        refItemPresenter.View.Title = "Изменение существующего издательства";
+        refItemPresenter.View.Heading = "Информация об издательстве";
+        refItemPresenter.View.ItemLabel = "Издательство:";
+        refItemPresenter.View.ItemText = press.Name;
 
-        if (refItemForm.ShowDialog() == DialogResult.OK)
+        if (refItemPresenter.View.ShowDialog())
         {
             try
             {
-                press.Name = refItemForm.ItemText;
+                press.Name = refItemPresenter.View.ItemText;
                 Model.PressRepository.Update(press);
-                View.ListView.Items[selectedIndex].Text = press.Name;
+                View.UpdateItemAt(selectedIndex, press.Name);
 
                 // Оповещаем подписчиков о том, что произошли изменения
                 ModifiedHandler();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при изменении информации об издательстве.", "Что-то пошло не так",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                View.ShowError("Произошла ошибка при изменении информации об издательстве.");
                 Utils.Log.Trace(ex);
             }
         }
@@ -118,12 +121,12 @@ public class PressesPresenter : BasePresenter<IRefView>
     private void OnDelete(object sender, EventArgs e)
     {
         // Восстанавливаем фокус
-        View.ListView.Focus();
+        View.FocusItemList();
 
-        ListView.SelectedIndexCollection selectedIndices = View.ListView.SelectedIndices;
+        IReadOnlyList<int> selectedIndices = View.SelectedItemIndices;
 
-        if (selectedIndices.Count == 0 || MessageBox.Show("Будут удалены не только эти издательства, но и все изданные ими книги.\n\nВы уверены, что хотите это всё удалить?",
-            "Удаление издательств и всех их книг", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+        if (selectedIndices.Count == 0 || !View.Confirm("Будут удалены не только эти издательства, но и все изданные ими книги.\n\nВы уверены, что хотите это всё удалить?",
+            "Удаление издательств и всех их книг"))
             return;
 
         try
@@ -133,8 +136,10 @@ public class PressesPresenter : BasePresenter<IRefView>
             // все следующие элементы поднимутся вверх и список выделенных элементов станет не актуален.
             for (int i = selectedIndices.Count - 1; i >= 0; i--)
             {
-                Model.PressRepository.Delete(((Press)View.ListView.Items[selectedIndices[i]].Tag).Id);
-                View.ListView.Items.RemoveAt(selectedIndices[i]);
+                int index = selectedIndices[i];
+                Model.PressRepository.Delete(Presses[index].Id);
+                Presses.RemoveAt(index);
+                View.RemoveItemAt(index);
             }
 
             // Оповещаем подписчиков о том, что произошли изменения
@@ -142,32 +147,23 @@ public class PressesPresenter : BasePresenter<IRefView>
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при удалении издательств.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при удалении издательств.");
             Utils.Log.Trace(ex);
         }
 
     }
 
-    // Очищаем список и заполняем его заново из модели
+    // Заново считываем список из модели и показываем его в представлении
     private void UpdateView()
     {
         try
         {
-            IEnumerable<Press> presses = Model.PressRepository.GetAll();
-
-            View.ListView.Items.Clear();
-            foreach (var press in presses)
-            {
-                ListViewItem item = View.ListView.Items.Add(new ListViewItem());
-                item.Text = press.Name;
-                item.Tag = press;
-            }
+            Presses = Model.PressRepository.GetAll().ToList();
+            View.ShowItems(Presses.Select(p => p.Name));
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Произошла ошибка при получении списка издательств.", "Что-то пошло не так",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            View.ShowError("Произошла ошибка при получении списка издательств.");
             Utils.Log.Trace(ex);
         }
     }

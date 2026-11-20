@@ -1,14 +1,27 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using MyLibrary.WinForms.Common.Mvp;
 
 namespace MyLibrary.WinForms.Common.Views;
 
-public interface IRefView : IView
+public interface IRefView : IDialogView
 {
     string Title { set; }
-    ListView ListView { get; }
-    string ListViewTheOnlyColumnName { set; }
+    string ColumnName { set; }
+
+    // Индексы выделенных элементов в порядке возрастания. Возвращается копия,
+    // которая не меняется при последующих изменениях списка.
+    IReadOnlyList<int> SelectedItemIndices { get; }
+
+    void ShowItems(IEnumerable<string> items);
+    void UpdateItemAt(int index, string text);
+    void RemoveItemAt(int index);
+    // Переводит фокус на список, выделяет указанные элементы и прокручивает список к ним
+    void SelectItems(IEnumerable<int> indices);
+    void FocusItemList();
+
+    void ShowError(string message);
+    bool Confirm(string message, string caption);
 
     event EventHandler Loaded;
     event EventHandler Add;
